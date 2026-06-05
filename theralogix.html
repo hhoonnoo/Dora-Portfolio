@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theralogix — Dora Hu Design</title>
+  <meta name="description" content="Theralogix — Print & Digital Design, 3D Modeling, and Product Photography by Dora Hu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #b89fa8;
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --light-gray: #f5f5f5;
+      --border: #e8e8e8;
+      --white: #ffffff;
+      --hero-bg: #dde3e8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--black);
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.5; }
+
+    /* ─── BACK LINK ───────────────────────────────────────── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray);
+      transition: color 0.2s;
+      padding: 6rem 3rem 0;
+    }
+
+    .back-link:hover { color: var(--black); }
+
+    /* ─── HERO STRIP ──────────────────────────────────────── */
+    .hero-strip {
+      margin-top: 1.5rem;
+      position: relative;
+      background: var(--hero-bg);
+      min-height: 220px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 2.5rem 3rem 0;
+      overflow: hidden;
+    }
+
+    .hero-products {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-products img {
+      max-height: 190px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      object-position: bottom;
+    }
+
+    .hero-brand {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding-top: 0.5rem;
+    }
+
+    .brand-name {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--black);
+      text-align: right;
+      margin-top: 0.25rem;
+    }
+
+    /* ─── PAGE TITLE ──────────────────────────────────────── */
+    .page-title {
+      padding: 3.5rem 3rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-title h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--black);
+    }
+
+    /* ─── META GRID ───────────────────────────────────────── */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta-left {
+      padding: 2.5rem 3rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .meta-right {
+      padding: 2.5rem 3rem;
+    }
+
+    .meta-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+    }
+
+    .meta-body {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+
+    .meta-body + .meta-label {
+      margin-top: 2rem;
+    }
+
+    .meta-right-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .meta-row-item {}
+
+    .roles-link {
+      color: #7a6fbe;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    /* ─── GALLERY ─────────────────────────────────────────── */
+    .gallery {
+      padding: 2.5rem 3rem 4rem;
+    }
+
+    /* Asymmetric masonry-style grid matching the screenshot */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: auto;
+      gap: 6px;
+    }
+
+    .gallery-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .gallery-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tile {
+      overflow: hidden;
+      border-radius: 4px;
+      background: #e8e0e4;
+    }
+
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Specific tile sizes */
+    .tile-large { height: 420px; }
+    .tile-wide  { height: 220px; }
+    .tile-tall  { height: 320px; flex: 1; }
+    .tile-sq    { height: 220px; flex: 1; }
+    .tile-med   { height: 260px; flex: 1; }
+    .tile-sm    { height: 180px; flex: 1; }
+
+    /* Color placeholders for tiles without individual images */
+    .c-pink      { background: #f2c4ce; }
+    .c-gray-blue { background: #c8d0d8; }
+    .c-slate     { background: #8a9aab; }
+    .c-mauve     { background: #d4bfc6; }
+    .c-cream     { background: #f0ece6; }
+    .c-rose      { background: #e8b4be; }
+    .c-teal      { background: #b8cec8; }
+    .c-soft      { background: #e4dce0; }
+    .c-warm      { background: #ddd4cc; }
+
+    .tile-label {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .tile-label-text {
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.3;
+    }
+
+    .tile-label-text em {
+      font-style: normal;
+      color: #b06060;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .footer-logo img { height: 32px; }
+
+    footer .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    footer .footer-links a {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    footer .footer-links a:hover { color: var(--black); }
+
+    footer .footer-date {
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .back-link { padding: 5rem 1.5rem 0; }
+      .hero-strip { padding: 2rem 1.5rem 0; min-height: 160px; }
+      .hero-products img { max-height: 130px; }
+      .page-title { padding: 2.5rem 1.5rem 2rem; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .meta-left { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; }
+      .meta-right { padding: 2rem 1.5rem; }
+      .gallery { padding: 2rem 1.5rem 3rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .tile-large { height: 280px; }
+      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="portfolio.html">
+      <img src="HU_Logo.png" alt="Dora Hu Design" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="portfolio.html">Work</a></li>
+      <li><a href="portfolio.html#about">About</a></li>
+      <li><a href="portfolio.html#services">Services</a></li>
+    </ul>
+  </nav>
+
+  <!-- BACK -->
+  <a class="back-link" href="portfolio.html">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to work
+  </a>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <div class="hero-products">
+      <img src="Theralogix.jpg" alt="Theralogix supplement product lineup" />
+    </div>
+    <div class="hero-brand">
+      <span class="brand-name">Theralogix</span>
+      <span class="brand-sub">Supplements from Science</span>
+    </div>
+  </div>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <h1>Theralogix</h1>
+  </div>
+
+  <!-- META GRID -->
+  <div class="meta-grid">
+    <div class="meta-left">
+      <p class="meta-label">Overview</p>
+      <p class="meta-body">
+        Theralogix is a leading producer of scientifically formulated nutritional supplements made from premium ingredients, independently tested and certified, and trusted by healthcare providers and patients for over 20 years.
+      </p>
+      <p class="meta-body" style="margin-top:1rem;">
+        I worked as a full-time graphic designer and help them creating both print and digital design, including packaging design, marketing assets, 3D animation and product shooting and editing.
+      </p>
+
+      <p class="meta-label" style="margin-top:2rem;">Tools</p>
+      <p class="meta-body">Adobe Illustrator, Photoshop, InDesign, Blender, and DSLR camera.</p>
+    </div>
+
+    <div class="meta-right">
+      <div class="meta-right-rows">
+        <div class="meta-row-item">
+          <p class="meta-label">Timeline</p>
+          <p class="meta-body">Sep 2024 – Present</p>
+        </div>
+        <div class="meta-row-item">
+          <p class="meta-label">Type</p>
+          <p class="meta-body">Full-Time</p>
+        </div>
+        <div class="meta-row-item">
+          <p class="meta-label">Roles</p>
+          <p class="meta-body">
+            <a class="roles-link" href="#">Graphic Designer</a> – Print &amp; Digital
+            Design, Advertising Design, 3D
+            Modeling, and Product Photography
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gallery-grid">
+
+      <!-- Left column -->
+      <div class="gallery-col">
+
+        <!-- Row 1: large pink product photo -->
+        <div class="tile tile-large c-pink">
+          <div class="tile-label">
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Row 2: two tiles side by side -->
+        <div class="gallery-row">
+          <div class="tile tile-sq c-mauve">
+            <div class="tile-label">
+              <p class="tile-label-text" style="font-size:0.85rem; font-style:italic; color:#555;">
+                Some people don't like labels.<br/>
+                We <em>swear by them.</em>
+              </p>
+            </div>
+          </div>
+          <div class="tile tile-sq c-cream">
+            <div class="tile-label">
+              <p class="tile-label-text">Doctor knows <em>best.</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: single wide -->
+        <div class="tile tile-wide c-soft">
+          <div class="tile-label" style="flex-direction:column; gap:0.4rem;">
+            <p class="tile-label-text">Supplements<br/>taken</p>
+            <p class="tile-label-text" style="color:#7a6fbe;">seriously.</p>
+          </div>
+        </div>
+
+        <!-- Row 4: single -->
+        <div class="tile tile-sq c-warm">
+          <div class="tile-label">
+            <p class="tile-label-text" style="font-size:0.85rem; font-style:italic; color:#555;">
+              We make a <em>big deal</em><br/>out of small print.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right column -->
+      <div class="gallery-col">
+
+        <!-- Row 1: ad tile -->
+        <div class="tile tile-wide c-gray-blue">
+          <div class="tile-label" style="flex-direction:column; gap:0.5rem; align-items:flex-start; padding:2rem;">
+            <p class="tile-label-text" style="font-size:1.2rem;">Supplements<br/><em style="color:#5a9a8a;">taken seriously.</em></p>
+          </div>
+        </div>
+
+        <!-- Row 2: tall slate -->
+        <div class="tile tile-tall c-slate">
+          <div class="tile-label">
+            <div></div>
+          </div>
+        </div>
+
+        <!-- Row 3: two small -->
+        <div class="gallery-row">
+          <div class="tile tile-med c-rose">
+            <div class="tile-label" style="flex-direction:column; gap:0.4rem;">
+              <p class="tile-label-text" style="font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; color:#888;">THERALOGIX</p>
+            </div>
+          </div>
+          <div class="tile tile-med c-teal">
+            <div class="tile-label" style="flex-direction:column; gap:0.5rem; align-items:flex-start; padding:1.5rem;">
+              <p class="tile-label-text" style="font-size:0.9rem; color:#fff;">The first.<br/>The best.<br/><em style="color:#f0d0a0;">Now even better.</em></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="portfolio.html">
+      <img src="HU_Logo.png" alt="Dora Hu Design" />
+    </a>
+    <ul class="footer-links">
+      <li><a href="portfolio.html#about">About</a></li>
+      <li><a href="portfolio.html#services">Services</a></li>
+    </ul>
+    <span class="footer-date">Jun 5, 2026</span>
+  </footer>
+
+</body>
+</html>

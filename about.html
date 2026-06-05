@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Dora Hu Design</title>
+  <meta name="description" content="About Dora Hu — Graphic Designer based in the Washington D.C. area." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.45; }
+
+    /* ─── MAIN LAYOUT ─────────────────────────────────────── */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 7rem 5rem 5rem;
+      gap: 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ─── LEFT: PHOTO + DECORATIONS ──────────────────────── */
+    .photo-col {
+      flex: 0 0 400px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: 300px;
+      z-index: 2;
+    }
+
+    .photo-frame img.main-photo {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 160px 160px 20px 20px;
+      display: block;
+    }
+
+    /* decorative shapes */
+    .deco {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    /* yellow starburst — top left */
+    .deco-star {
+      top: -30px;
+      left: -60px;
+      width: 80px;
+      height: 80px;
+      z-index: 3;
+    }
+
+    /* orange flower — top right */
+    .deco-flower {
+      top: -20px;
+      right: -50px;
+      width: 90px;
+      height: 90px;
+      z-index: 3;
+    }
+
+    /* blue spiral — bottom left */
+    .deco-spiral {
+      bottom: 60px;
+      left: -55px;
+      width: 75px;
+      height: 75px;
+      z-index: 3;
+    }
+
+    /* pink rectangle — bottom left */
+    .deco-rect {
+      bottom: 0;
+      left: -10px;
+      width: 100px;
+      height: 90px;
+      background: #f5b8c4;
+      z-index: 1;
+      border-radius: 4px;
+    }
+
+    /* green dots — right side */
+    .deco-dots {
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 3;
+    }
+
+    .deco-dots span {
+      display: block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #4caf50;
+    }
+
+    /* ─── RIGHT: TEXT ─────────────────────────────────────── */
+    .text-col {
+      flex: 1;
+    }
+
+    .text-col h1 {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 2.2rem;
+      color: #1a1a1a;
+    }
+
+    .bio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .bio-item {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #1a1a1a;
+    }
+
+    .contact-label {
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 0.85rem;
+      color: #1a1a1a;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .contact-links a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #3a8fa0;
+      transition: opacity 0.2s;
+    }
+
+    .contact-links a:hover { opacity: 0.65; }
+
+    .resume-note {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #9b9b9b;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .page {
+        flex-direction: column;
+        align-items: center;
+        padding: 6rem 2rem 4rem;
+        gap: 3rem;
+      }
+
+      .photo-col { flex: none; }
+
+      nav { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="HU_Logo.png" alt="Dora Hu Design" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Work</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/#services">Services</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="page">
+
+    <!-- LEFT: photo with decorative shapes -->
+    <div class="photo-col">
+
+      <!-- yellow starburst -->
+      <svg class="deco deco-star" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 2L44.5 35.5L78 40L44.5 44.5L40 78L35.5 44.5L2 40L35.5 35.5Z" fill="#F5D800"/>
+        <path d="M40 14L42.5 37.5L66 40L42.5 42.5L40 66L37.5 42.5L14 40L37.5 37.5Z" fill="#F5D800" opacity="0.4"/>
+      </svg>
+
+      <!-- orange flower -->
+      <svg class="deco deco-flower" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="45" cy="22" r="18" fill="#F88955"/>
+        <circle cx="45" cy="68" r="18" fill="#F88955"/>
+        <circle cx="22" cy="45" r="18" fill="#F88955"/>
+        <circle cx="68" cy="45" r="18" fill="#F88955"/>
+        <circle cx="45" cy="45" r="14" fill="#F88955"/>
+      </svg>
+
+      <!-- blue spiral -->
+      <svg class="deco deco-spiral" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M37.5 37.5 C37.5 20 55 10 65 20 C75 30 65 50 45 55 C25 60 8 45 12 28 C16 11 35 4 50 10" stroke="#3a6fd8" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M37.5 37.5 C37.5 26 48 19 55 25 C62 31 56 44 44 47 C32 50 22 42 25 32" stroke="#3a6fd8" stroke-width="5" stroke-linecap="round" fill="none"/>
+      </svg>
+
+      <!-- pink rectangle -->
+      <div class="deco deco-rect"></div>
+
+      <!-- photo -->
+      <div class="photo-frame">
+        <img class="main-photo" src="Hero_image-01.png" alt="Dora Hu" />
+      </div>
+
+      <!-- green dots -->
+      <div class="deco deco-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: text -->
+    <div class="text-col">
+      <h1>Hi, I'm Dora!</h1>
+
+      <div class="bio-list">
+        <p class="bio-item">🧑‍💻 I'm an experienced Graphic Designer. Over the past couple of years, I've gained experience working in both agency-style and in-house environments.</p>
+        <p class="bio-item">🎓 I graduated from the University of Maryland, College Park, with a Bachelor of Arts in Graphic Design and a minor in General Business from the Smith School of Business.</p>
+        <p class="bio-item">🥢 I was born and raised in Taipei, Taiwan, and immigrated to the US with my family when I was 17 years old. Growing up with these cultural influences has given me a unique perspective.</p>
+        <p class="bio-item">🎨 My works are always colorful, vivid, and optimistic, aiming to inspire more people. I am constantly striving for fresh and creative visual storytelling. ✨</p>
+        <p class="bio-item">🧁 When I'm not designing, you can find me at a cute coffee shop, baking way too many cookies, getting my hands messy with clay, or learning how to code.</p>
+      </div>
+
+      <p class="contact-label">💡 Please feel free to get in touch!</p>
+      <div class="contact-links">
+        <a href="mailto:dorahudesign@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/dorahudesign" target="_blank" rel="noopener">Linkedin</a>
+      </div>
+      <p class="resume-note">Current résumé available upon request.*</p>
+    </div>
+
+  </main>
+
+</body>
+</html>

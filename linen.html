@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linen — Dora Hu Design</title>
+  <meta name="description" content="Linen — AI-powered fashion app. A senior capstone project by Dora Hu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #F88955;
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --light-gray: #f5f5f5;
+      --border: #e8e8e8;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--black);
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.5; }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      padding: 7rem 6rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 4rem;
+      margin-top: 2.5rem;
+    }
+
+    .hero-description {
+      flex: 1;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .hero-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      min-width: 220px;
+    }
+
+    .hero-detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .detail-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .detail-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* ─── HERO ORANGE BAND ────────────────────────────────── */
+    .hero-band {
+      background: var(--orange);
+      padding: 3rem 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+
+    .hero-band-text {
+      color: var(--white);
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .hero-band-text strong { font-weight: 800; }
+
+    .proto-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--orange);
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.85rem 1.75rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .proto-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .proto-btn svg { flex-shrink: 0; }
+
+    /* ─── CONTENT WRAPPER ─────────────────────────────────── */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ─── SECTION ─────────────────────────────────────────── */
+    .case-section {
+      padding: 5rem 6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-section:last-child { border-bottom: none; }
+
+    .section-number {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-heading {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .section-body p + p { margin-top: 1rem; }
+
+    /* ─── PROBLEM SECTION ─────────────────────────────────── */
+    .problem-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .problem-card {
+      background: var(--light-gray);
+      border-radius: 20px;
+      padding: 1.75rem;
+    }
+
+    .problem-card .prob-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.75rem;
+    }
+
+    .problem-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .problem-card p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─── SOLUTION CARDS ──────────────────────────────────── */
+    .solution-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .solution-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      background: var(--light-gray);
+      border-radius: 20px;
+      padding: 1.75rem 2rem;
+    }
+
+    .sol-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.5rem;
+    }
+
+    .sol-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+
+    .sol-content p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─── RESEARCH ────────────────────────────────────────── */
+    .research-stats {
+      display: flex;
+      gap: 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .stat-box {
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-box .stat-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-box .stat-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    .pain-points {
+      margin-top: 2.5rem;
+    }
+
+    .pain-points h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .pain-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      list-style: none;
+    }
+
+    .pain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--black);
+      line-height: 1.55;
+    }
+
+    .pain-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      margin-top: 0.45rem;
+    }
+
+    /* ─── COMPETITIVE ANALYSIS ────────────────────────────── */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .comp-card {
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .comp-card .comp-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .comp-row {
+      margin-bottom: 0.85rem;
+    }
+
+    .comp-row .row-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .row-label.strength { color: #22a06b; }
+    .row-label.weakness { color: #e5341b; }
+
+    .comp-row p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── USER FLOW / IDEATION ────────────────────────────── */
+    .flow-pages {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .flow-page {
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 0.6rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* ─── TESTING ─────────────────────────────────────────── */
+    .testing-findings {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .finding-item {
+      border-left: 3px solid var(--orange);
+      padding-left: 1.25rem;
+    }
+
+    .finding-item .finding-cat {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.3rem;
+    }
+
+    .finding-item p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── DESIGN SYSTEM ───────────────────────────────────── */
+    .design-system {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .ds-block h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.85rem;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .swatch {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .tool-chips {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .tool-chip {
+      background: var(--light-gray);
+      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* ─── REFLECTION ──────────────────────────────────────── */
+    .reflection-quote {
+      background: var(--orange);
+      border-radius: 24px;
+      padding: 3rem;
+      margin-top: 2.5rem;
+    }
+
+    .reflection-quote p {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    .reflection-quote .quote-mark {
+      font-size: 3rem;
+      line-height: 0.5;
+      font-weight: 800;
+      color: rgba(255,255,255,0.4);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      padding: 3rem 6rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .footer-logo img {
+      height: 32px;
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    footer .footer-links a {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    footer .footer-links a:hover { color: var(--black); }
+
+    footer .footer-date {
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+
+    /* ─── BACK LINK ───────────────────────────────────────── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray);
+      transition: color 0.2s;
+      padding: 1.5rem 6rem 0;
+    }
+
+    .back-link:hover { color: var(--black); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero, .case-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero-band { padding: 2rem 1.5rem; flex-direction: column; }
+      .hero-meta-row { flex-direction: column; gap: 2rem; }
+      .problem-cards, .comp-grid { grid-template-columns: 1fr; }
+      .research-stats { flex-wrap: wrap; }
+      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; }
+      .back-link { padding-left: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="portfolio.html">
+      <img src="HU_Logo.png" alt="Dora Hu Design" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="portfolio.html#about">About</a></li>
+      <li><a href="portfolio.html#services">Services</a></li>
+    </ul>
+  </nav>
+
+  <!-- BACK -->
+  <a class="back-link" href="portfolio.html">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to work
+  </a>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Case Study</div>
+    <h1>Linen</h1>
+    <div class="hero-meta-row">
+      <p class="hero-description">
+        An AI-powered fashion app offering fashion advice, outfit generation based on preferences, virtual try-on, and an Instagram-style interface for fashion inspiration.
+      </p>
+      <div class="hero-details">
+        <div class="hero-detail-item">
+          <span class="detail-label">Tools</span>
+          <span class="detail-value">Figma, Adobe Photoshop, Illustrator</span>
+        </div>
+        <div class="hero-detail-item">
+          <span class="detail-label">Timeline</span>
+          <span class="detail-value">Oct 2023 – Jan 2024</span>
+        </div>
+        <div class="hero-detail-item">
+          <span class="detail-label">Role</span>
+          <span class="detail-value">Product Design &amp; Art Direction</span>
+        </div>
+        <div class="hero-detail-item">
+          <span class="detail-label">Collaborator</span>
+          <span class="detail-value">Chisom M.</span>
+        </div>
+        <div class="hero-detail-item">
+          <span class="detail-label">Context</span>
+          <span class="detail-value">Senior Capstone Project</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORANGE BAND -->
+  <div class="hero-band">
+    <p class="hero-band-text">
+      Linen is a <strong>senior capstone project</strong> that reimagines personal styling through AI — giving every college student a smart, budget-conscious fashion assistant in their pocket.
+    </p>
+    <a class="proto-btn" href="https://www.figma.com" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8a5 5 0 1 0 10 0A5 5 0 0 0 3 8z" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M8 5.5V8l1.5 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      View Prototype
+    </a>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="case-section">
+    <p class="section-number">The Problem</p>
+    <h2 class="section-heading">What's standing between college students and their best look?</h2>
+    <p class="section-body">
+      Through user research interviews with 18–25 year-olds, we identified three recurring pain points that made getting dressed every day more stressful than it needed to be.
+    </p>
+    <div class="problem-cards">
+      <div class="problem-card">
+        <p class="prob-num">01</p>
+        <h3>Outfit Selection Difficulty</h3>
+        <p>Choosing an outfit takes too much time and mental energy, especially when balancing a busy academic schedule.</p>
+      </div>
+      <div class="problem-card">
+        <p class="prob-num">02</p>
+        <h3>Financial Constraints</h3>
+        <p>Limited budgets make it hard to explore new styles or buy pieces that truly work together — leading to underused wardrobes.</p>
+      </div>
+      <div class="problem-card">
+        <p class="prob-num">03</p>
+        <h3>Trend Awareness Gaps</h3>
+        <p>Choosing the right outfit for the right occasion — interviews, dates, social events — is a persistent source of anxiety.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section class="case-section">
+    <p class="section-number">Solution</p>
+    <h2 class="section-heading">Four features that address every pain point</h2>
+    <div class="solution-list">
+      <div class="solution-item">
+        <div class="sol-num">01</div>
+        <div class="sol-content">
+          <h3>AI-Generated Outfits</h3>
+          <p>Personalized outfit recommendations generated by AI based on occasions, weather, and user preferences — removing the guesswork entirely.</p>
+        </div>
+      </div>
+      <div class="solution-item">
+        <div class="sol-num">02</div>
+        <div class="sol-content">
+          <h3>3D Digitization &amp; Virtual Try-On</h3>
+          <p>Digitize wardrobe items and virtually try on outfits before getting dressed, enabling risk-free wardrobe exploration without buying anything new.</p>
+        </div>
+      </div>
+      <div class="solution-item">
+        <div class="sol-num">03</div>
+        <div class="sol-content">
+          <h3>Community Inspiration Feed</h3>
+          <p>An Instagram-style feed of user-generated outfits from around the world, bridging the trend awareness gap through social discovery.</p>
+        </div>
+      </div>
+      <div class="solution-item">
+        <div class="sol-num">04</div>
+        <div class="sol-content">
+          <h3>AR Try-On with In-App Shopping</h3>
+          <p>Try on items from the explore feed using augmented reality, then add to wishlist or purchase directly — without leaving the app.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 RESEARCH -->
+  <section class="case-section">
+    <p class="section-number">01 — Research</p>
+    <h2 class="section-heading">Understanding the user</h2>
+    <p class="section-body">
+      We conducted five one-on-one user interviews with college students between ages 18–25. Participants were recruited from campus and screened to ensure they actively engaged with fashion decisions on a daily basis.
+    </p>
+    <div class="research-stats">
+      <div class="stat-box">
+        <div class="stat-num">5</div>
+        <div class="stat-label">User Interviews</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">18–25</div>
+        <div class="stat-label">Age Range</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Core Pain Points</div>
+      </div>
+    </div>
+
+    <div class="pain-points">
+      <h3>Key Findings</h3>
+      <ul class="pain-list">
+        <li>Getting dressed takes too long — participants reported spending 15–30 minutes daily on outfit decisions.</li>
+        <li>Budget limits exploration — students feel stuck wearing the same items repeatedly due to financial constraints.</li>
+        <li>Occasion anxiety — choosing the right outfit for specific social contexts causes significant stress.</li>
+      </ul>
+    </div>
+
+    <h3 style="margin-top:2.5rem; font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); margin-bottom:1rem;">Competitive Analysis</h3>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <p class="comp-name">Nike Virtual View</p>
+        <div class="comp-row">
+          <p class="row-label strength">Strength</p>
+          <p>Polished AR try-on experience with strong brand recognition and seamless shopping integration.</p>
+        </div>
+        <div class="comp-row">
+          <p class="row-label weakness">Weakness</p>
+          <p>Limited to Nike products only — no support for users' existing wardrobes or third-party items.</p>
+        </div>
+      </div>
+      <div class="comp-card">
+        <p class="comp-name">Acloset</p>
+        <div class="comp-row">
+          <p class="row-label strength">Strength</p>
+          <p>Digital wardrobe organization with outfit logging and statistics — great for closet management.</p>
+        </div>
+        <div class="comp-row">
+          <p class="row-label weakness">Weakness</p>
+          <p>No AI generation or virtual try-on; heavily manual input required with no social discovery layer.</p>
+        </div>
+      </div>
+      <div class="comp-card">
+        <p class="comp-name">Aiuta</p>
+        <div class="comp-row">
+          <p class="row-label strength">Strength</p>
+          <p>Virtual try-on using AI photo fitting; supports multiple retailers with a clean UI.</p>
+        </div>
+        <div class="comp-row">
+          <p class="row-label weakness">Weakness</p>
+          <p>No community or inspiration features; purely transactional with limited personalization over time.</p>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:1.25rem; font-size:0.82rem; color:var(--gray); line-height:1.6;">
+      <strong style="color:var(--black);">Insight:</strong> Grouping information together using cards can best utilize space. Familiar interface patterns enable quick user adoption, and user-generated content drives sustained engagement.
+    </p>
+  </section>
+
+  <!-- 02 IDEATION -->
+  <section class="case-section">
+    <p class="section-number">02 — Ideation</p>
+    <h2 class="section-heading">From sketches to structure</h2>
+    <p class="section-body">
+      We began with low-fidelity sketches and peer collaboration sessions to explore a wide range of interaction models. Ideas were stress-tested against our research findings before narrowing down to a core user flow.
+    </p>
+    <p class="section-body" style="margin-top:1rem;">
+      The user flow was mapped across five key pages — covering the complete journey from onboarding through AI generation, virtual try-on, community browsing, and closet management.
+    </p>
+    <div class="flow-pages">
+      <span class="flow-page">Onboarding</span>
+      <span class="flow-page">AI Outfit Generator</span>
+      <span class="flow-page">Virtual Try-On</span>
+      <span class="flow-page">Explore Feed</span>
+      <span class="flow-page">My Closet</span>
+    </div>
+  </section>
+
+  <!-- 03 DESIGN -->
+  <section class="case-section">
+    <p class="section-number">03 — Design</p>
+    <h2 class="section-heading">Wireframes &amp; lo-fi prototype</h2>
+    <p class="section-body">
+      Low-fidelity wireframes were created in Figma and tested with real users before any visual styling was applied. This ensured that core interaction patterns and information hierarchy were sound before investing in high-fidelity execution.
+    </p>
+    <p class="section-body" style="margin-top:1rem;">
+      Lo-fi prototype testing revealed that users expected the AI generator to surface on the home screen — not buried in a secondary tab — and that the closet management flow needed to be reordered to match mental models around getting dressed.
+    </p>
+    <div class="design-system">
+      <div class="ds-block">
+        <h3>Tools Used</h3>
+        <div class="tool-chips">
+          <span class="tool-chip">Figma</span>
+          <span class="tool-chip">Adobe Photoshop</span>
+          <span class="tool-chip">Adobe Illustrator</span>
+        </div>
+      </div>
+      <div class="ds-block">
+        <h3>Brand Palette</h3>
+        <div class="color-swatches">
+          <div class="swatch" style="background:#F88955;" title="#F88955"></div>
+          <div class="swatch" style="background:#1a1a1a;" title="#1a1a1a"></div>
+          <div class="swatch" style="background:#f5f5f5;" title="#f5f5f5"></div>
+          <div class="swatch" style="background:#ffffff; border:1.5px solid #e8e8e8;" title="#ffffff"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 USER TESTING -->
+  <section class="case-section">
+    <p class="section-number">04 — User Testing</p>
+    <h2 class="section-heading">1:1 moderated usability sessions</h2>
+    <p class="section-body">
+      Three participants completed moderated usability sessions — conducted both in-person and remotely via Zoom. Tasks covered the full product journey: onboarding, outfit generation, closet management, and social browsing.
+    </p>
+    <div class="testing-findings">
+      <div class="finding-item">
+        <p class="finding-cat">UI</p>
+        <p>Typography sizing on secondary screens was too small for quick scanning. Increased base font sizes and improved contrast ratios across all flows.</p>
+      </div>
+      <div class="finding-item">
+        <p class="finding-cat">Explore Page</p>
+        <p>Users wanted to filter the community feed by occasion and style category — not just by trending. Added filter chips to the top of the feed.</p>
+      </div>
+      <div class="finding-item">
+        <p class="finding-cat">Closet Page</p>
+        <p>The add-item flow required too many steps. Streamlined to a 2-tap camera capture that auto-categorizes garments using AI tagging.</p>
+      </div>
+      <div class="finding-item">
+        <p class="finding-cat">AI Generator</p>
+        <p>Users wanted more control over regenerating specific parts of an outfit rather than the whole look. Introduced per-item swap functionality.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 HI-FI PROTOTYPE -->
+  <section class="case-section">
+    <p class="section-number">05 — Hi-fi Prototype</p>
+    <h2 class="section-heading">The final design system &amp; interactive prototype</h2>
+    <p class="section-body">
+      The high-fidelity prototype brings together the full design system — typography, color, component library, and micro-interactions — into a clickable, testable product. Every screen was built in Figma with a shared component library to ensure consistency across the five core flows.
+    </p>
+    <p class="section-body" style="margin-top:1rem;">
+      The prototype was presented at the senior capstone showcase and received feedback from peers, faculty, and industry professionals.
+    </p>
+    <a class="proto-btn" href="https://www.figma.com" target="_blank" rel="noopener" style="margin-top:2rem; background:var(--orange); color:var(--white); display:inline-flex;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8a5 5 0 1 0 10 0A5 5 0 0 0 3 8z" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M8 5.5V8l1.5 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      View Prototype in Figma
+    </a>
+  </section>
+
+  <!-- 06 REFLECTION -->
+  <section class="case-section">
+    <p class="section-number">06 — Reflection</p>
+    <h2 class="section-heading">What I learned</h2>
+    <p class="section-body">
+      Linen was my most research-intensive project to date. Managing a full UX process — from interviews through hi-fi delivery — within a four-month timeline pushed me to prioritize ruthlessly and stay grounded in user needs rather than design preferences.
+    </p>
+    <div class="reflection-quote">
+      <span class="quote-mark">"</span>
+      <p>User testing is key to UX design. You can sketch the most elegant flow imaginable and still get it completely wrong — the moment a real user sits down with your prototype, you learn more in five minutes than in five weeks of self-critique.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="portfolio.html">
+      <img src="HU_Logo.png" alt="Dora Hu Design" />
+    </a>
+    <ul class="footer-links">
+      <li><a href="portfolio.html#about">About</a></li>
+      <li><a href="portfolio.html#services">Services</a></li>
+    </ul>
+    <span class="footer-date">Jan 23, 2026</span>
+  </footer>
+
+</body>
+</html>
