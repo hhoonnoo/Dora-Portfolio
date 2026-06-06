@@ -33,13 +33,15 @@
       padding: 28px 48px;
     }
 
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: 2rem;
-      letter-spacing: -0.02em;
-      color: #111111;
-      text-decoration: none;
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
     }
 
     .nav-links {
@@ -49,21 +51,16 @@
     }
 
     .nav-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.9rem;
       font-weight: 400;
-      color: #111111;
+      color: #1a1a1a;
       text-decoration: none;
-      letter-spacing: 0.01em;
       transition: opacity 0.2s ease;
     }
 
     .nav-links a:hover {
       opacity: 0.5;
-    }
-
-    .nav-links a.active {
-      font-weight: 500;
     }
 
     /* ── Page heading ── */
@@ -226,6 +223,66 @@
       background: #2617FF;
     }
 
+    /* ── Hamburger — hidden on desktop ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 9999;
+      position: relative;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 620px) {
+      nav { padding: 1rem 1.5rem; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 9000;
+        padding-top: 0;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
+
+      .nav-hamburger { display: flex; }
+
+      .services-list { padding: 0 16px 140px; }
+
+      .service-body-content { padding-left: 52px; }
+    }
+
     /* ── Edit fab (right edge) ── */
     .edit-fab {
       position: fixed;
@@ -254,12 +311,17 @@
 
   <!-- Navigation -->
   <nav>
-    <a href="/" class="logo">hu</a>
-    <ul class="nav-links">
+    <a href="/" class="nav-logo">
+      <img src="HU_Logo.png" alt="Hu Logo" />
+    </a>
+    <ul class="nav-links" id="nav-links">
       <li><a href="portfolio.html">Work</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#" class="active">Services</a></li>
     </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- Page title -->
@@ -358,6 +420,22 @@
   </div>
 
   <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          navLinks.classList.remove('open');
+        });
+      });
+    }
+
     // Magnetic button
     const magnet = document.querySelector('.floating-anchor .floating-btn');
     const magnetAnchor = document.querySelector('.floating-anchor');
