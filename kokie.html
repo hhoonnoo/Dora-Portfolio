@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kokie Cosmetics — Dora Hu Design</title>
+  <meta name="description" content="Kokie Cosmetics — Digital Design, Advertising Design, and Product Photography by Dora Hu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #b8a8cc;
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --light-gray: #f5f5f5;
+      --border: #e0e0e0;
+      --white: #ffffff;
+      --hero-bg: #c4b5d5;
+      --gap: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img { height: 36px; width: auto; display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--black);
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.5; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 9999;
+      position: relative;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 620px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 9000;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.6rem; font-weight: 700; }
+    }
+
+    /* ─── HERO STRIP ──────────────────────────────────────── */
+    .hero-strip {
+      margin-top: 60px;
+      position: relative;
+      background: var(--hero-bg);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-logo img {
+      height: 80px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* ─── PAGE TITLE ──────────────────────────────────────── */
+    .page-title {
+      text-align: center;
+      padding: 3.5rem 3rem 2.5rem;
+    }
+
+    .page-title h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--black);
+    }
+
+    /* ─── META SECTION ────────────────────────────────────── */
+    .meta-section {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+      gap: 2rem 6rem;
+    }
+
+    .meta-left { display: flex; flex-direction: column; gap: 1.6rem; }
+    .meta-right { display: flex; flex-direction: column; gap: 1.6rem; }
+
+    .meta-block {}
+
+    .meta-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.55rem;
+    }
+
+    .meta-text {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.72;
+    }
+
+    .meta-text + .meta-text { margin-top: 0.75rem; }
+
+    .roles-link {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ─── GALLERY ─────────────────────────────────────────── */
+    .gallery {
+      padding: 2.5rem 3rem 0;
+    }
+
+    .g-row {
+      display: flex;
+      gap: var(--gap);
+      margin-bottom: var(--gap);
+    }
+
+    /* Placeholder tile base */
+    .ph {
+      position: relative;
+      background: #ede8f0;
+      border-radius: 3px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ph img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ph-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      pointer-events: none;
+    }
+
+    .ph-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(0,0,0,0.18);
+      line-height: 1;
+    }
+
+    .ph-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.28);
+    }
+
+    /* ── Color variants ── */
+    .c-lavender  { background: #ddd4eb; }
+    .c-rose      { background: #f0dde4; }
+    .c-nude      { background: #f0e8e0; }
+    .c-charcoal  { background: #2e2e3a; }
+    .c-charcoal .ph-num,
+    .c-charcoal .ph-tag { color: rgba(255,255,255,0.25); }
+    .c-blush     { background: #f4d5dc; }
+    .c-peach     { background: #f5dfc8; }
+    .c-sage      { background: #c8d8c4; }
+    .c-cream     { background: #f8f4ee; }
+    .c-mauve     { background: #d8c4cc; }
+    .c-ivory     { background: #f9f6f0; }
+    .c-plum      { background: #c4a8cc; }
+    .c-warm      { background: #e8ddd4; }
+    .c-terracotta{ background: #e8c4b0; }
+    .c-olive     { background: #b8c4a0; }
+
+    /* ── Width helpers ── */
+    .w-full { flex: 1 1 100%; }
+    .w-half { flex: 1 1 0; }
+    .w-third { flex: 1 1 0; }
+    .w-quarter { flex: 0 0 25%; }
+    .w-3quarter { flex: 1 1 0; }
+    .w-2third { flex: 2 1 0; }
+    .w-1third { flex: 1 1 0; }
+
+    /* Narrow for 3-col n-w-n rows */
+    .w-narrow { flex: 0 0 22%; }
+    .w-wide   { flex: 1 1 0; }
+
+    /* ── Height helpers ── */
+    .h-xs   { height: 140px; }
+    .h-sm   { height: 200px; }
+    .h-md   { height: 260px; }
+    .h-lg   { height: 320px; }
+    .h-xl   { height: 400px; }
+    .h-tall { height: 480px; }
+
+    /* ─── SECTION HEADERS (Behind the Scene / The Team) ──── */
+    .section-block {
+      padding: 3rem 3rem 2rem;
+    }
+
+    .section-block h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .caption-grid {
+      display: flex;
+      gap: var(--gap);
+    }
+
+    .caption-item {
+      flex: 1 1 0;
+    }
+
+    .caption-item .ph {
+      width: 100%;
+    }
+
+    .caption-text {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gray);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .caption-text em {
+      font-style: normal;
+      font-size: 0.72rem;
+      color: #999;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-strip { height: 150px; }
+      .hero-logo img { height: 56px; }
+      .page-title { padding: 2.5rem 1.5rem 1.5rem; }
+      .meta-section {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem 3rem;
+        gap: 1.5rem 0;
+      }
+      .gallery { padding: 1.5rem 1rem 0; }
+      .g-row { flex-wrap: wrap; }
+      .w-half, .w-third, .w-quarter, .w-3quarter, .w-2third, .w-1third,
+      .w-narrow, .w-wide { flex: 1 1 45%; }
+      .w-full { flex: 1 1 100%; }
+      .section-block { padding: 2rem 1.5rem 1.5rem; }
+      .caption-grid { flex-wrap: wrap; }
+      .caption-item { flex: 1 1 45%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">
+      <img src="HU_Logo.png" alt="Hu Logo" />
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="portfolio.html">Work</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <div class="hero-logo">
+      <img src="Kokie-Logo-WHT.png" alt="Kokie Professional" />
+    </div>
+  </div>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <h1>Kokie Cosmetics</h1>
+  </div>
+
+  <!-- META -->
+  <div class="meta-section">
+    <div class="meta-left">
+      <div class="meta-block">
+        <p class="meta-label">Overview</p>
+        <p class="meta-text">Kokie Cosmetics, a K-Beauty inspired cosmetic brand, was founded in 2015 in Maryland. They offer high quality products at an affordable price point.</p>
+        <p class="meta-text">I worked as a Design Intern creating marketing assets, website banners, animated social media graphics, and product shooting and editing.</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Tools</p>
+        <p class="meta-text">Adobe Illustrator, Photoshop, Lightroom, Canva, After Effects</p>
+      </div>
+    </div>
+
+    <div class="meta-right">
+      <div class="meta-block">
+        <p class="meta-label">Timeline</p>
+        <p class="meta-text">Jun – Dec 2023</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Type</p>
+        <p class="meta-text">Internship</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Role</p>
+        <p class="meta-text">
+          <a class="roles-link" href="#">Graphic Design Intern</a> – Digital Design, Advertising Design, Product Photography
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── GALLERY ─────────────────────────────────────────── -->
+  <div class="gallery">
+
+    <!-- Row 1: two equal landscape images -->
+    <div class="g-row">
+      <div class="ph w-half h-md c-lavender">
+        <div class="ph-label"><span class="ph-num">1</span><span class="ph-tag">Image 1</span></div>
+      </div>
+      <div class="ph w-half h-md c-charcoal">
+        <div class="ph-label"><span class="ph-num">2</span><span class="ph-tag">Image 2</span></div>
+      </div>
+    </div>
+
+    <!-- Row 2: "ONLY TWO STEPS" ad + product shot -->
+    <div class="g-row">
+      <div class="ph w-half h-md c-rose">
+        <div class="ph-label"><span class="ph-num">3</span><span class="ph-tag">Image 3</span></div>
+      </div>
+      <div class="ph w-half h-md c-ivory">
+        <div class="ph-label"><span class="ph-num">4</span><span class="ph-tag">Image 4</span></div>
+      </div>
+    </div>
+
+    <!-- Row 3: Full-width LIPS banner -->
+    <div class="g-row">
+      <div class="ph w-full h-md c-blush">
+        <div class="ph-label"><span class="ph-num">5</span><span class="ph-tag">Image 5 — Full Width</span></div>
+      </div>
+    </div>
+
+    <!-- Row 4: Full-width SKINCARE banner -->
+    <div class="g-row">
+      <div class="ph w-full h-md c-sage">
+        <div class="ph-label"><span class="ph-num">6</span><span class="ph-tag">Image 6 — Full Width</span></div>
+      </div>
+    </div>
+
+    <!-- Row 5: PERFECTING PORELESS PRIMER + BROW MASCARA -->
+    <div class="g-row">
+      <div class="ph w-half h-lg c-cream">
+        <div class="ph-label"><span class="ph-num">7</span><span class="ph-tag">Image 7</span></div>
+      </div>
+      <div class="ph w-half h-lg c-nude">
+        <div class="ph-label"><span class="ph-num">8</span><span class="ph-tag">Image 8</span></div>
+      </div>
+    </div>
+
+    <!-- Row 6: LIQUID LIP POUDRE — dark left product + right text layout -->
+    <div class="g-row">
+      <div class="ph w-half h-lg c-charcoal">
+        <div class="ph-label"><span class="ph-num">9</span><span class="ph-tag">Image 9</span></div>
+      </div>
+      <div class="ph w-half h-lg c-charcoal">
+        <div class="ph-label"><span class="ph-num">10</span><span class="ph-tag">Image 10</span></div>
+      </div>
+    </div>
+
+    <!-- Row 7: two product shots -->
+    <div class="g-row">
+      <div class="ph w-half h-md c-peach">
+        <div class="ph-label"><span class="ph-num">11</span><span class="ph-tag">Image 11</span></div>
+      </div>
+      <div class="ph w-half h-md c-mauve">
+        <div class="ph-label"><span class="ph-num">12</span><span class="ph-tag">Image 12</span></div>
+      </div>
+    </div>
+
+    <!-- Row 8: two product shots -->
+    <div class="g-row">
+      <div class="ph w-half h-md c-terracotta">
+        <div class="ph-label"><span class="ph-num">13</span><span class="ph-tag">Image 13</span></div>
+      </div>
+      <div class="ph w-half h-md c-warm">
+        <div class="ph-label"><span class="ph-num">14</span><span class="ph-tag">Image 14</span></div>
+      </div>
+    </div>
+
+    <!-- Row 9: tall left product + stacked right (two stacked) -->
+    <div class="g-row" style="align-items: stretch;">
+      <div class="ph w-1third c-nude" style="height: auto; min-height: 420px;">
+        <div class="ph-label"><span class="ph-num">15</span><span class="ph-tag">Image 15</span></div>
+      </div>
+      <div class="w-2third" style="display:flex; flex-direction:column; gap:var(--gap);">
+        <div class="ph h-md c-lavender" style="flex:1;">
+          <div class="ph-label"><span class="ph-num">16</span><span class="ph-tag">Image 16</span></div>
+        </div>
+        <div class="ph h-md c-rose" style="flex:1;">
+          <div class="ph-label"><span class="ph-num">17</span><span class="ph-tag">Image 17</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 10: narrow | INSTANTLY CONCEAL IMPERFECTIONS | narrow -->
+    <div class="g-row">
+      <div class="ph w-narrow h-lg c-nude">
+        <div class="ph-label"><span class="ph-num">18</span><span class="ph-tag">Image 18</span></div>
+      </div>
+      <div class="ph w-wide h-lg c-peach">
+        <div class="ph-label"><span class="ph-num">19</span><span class="ph-tag">Image 19</span></div>
+      </div>
+      <div class="ph w-narrow h-lg c-cream">
+        <div class="ph-label"><span class="ph-num">20</span><span class="ph-tag">Image 20</span></div>
+      </div>
+    </div>
+
+    <!-- Row 11: narrow | GEL-INK DUAL-SIDED EYELINER | narrow -->
+    <div class="g-row">
+      <div class="ph w-narrow h-md c-charcoal">
+        <div class="ph-label"><span class="ph-num">21</span><span class="ph-tag">Image 21</span></div>
+      </div>
+      <div class="ph w-wide h-md c-ivory">
+        <div class="ph-label"><span class="ph-num">22</span><span class="ph-tag">Image 22</span></div>
+      </div>
+      <div class="ph w-narrow h-md c-lavender">
+        <div class="ph-label"><span class="ph-num">23</span><span class="ph-tag">Image 23</span></div>
+      </div>
+    </div>
+
+    <!-- Row 12: Artist Palette + PROBIOTIC CLEANSERS -->
+    <div class="g-row">
+      <div class="ph w-half h-md c-plum">
+        <div class="ph-label"><span class="ph-num">24</span><span class="ph-tag">Image 24</span></div>
+      </div>
+      <div class="ph w-half h-md c-sage">
+        <div class="ph-label"><span class="ph-num">25</span><span class="ph-tag">Image 25</span></div>
+      </div>
+    </div>
+
+    <!-- Row 13: Full-width MICRO FINE EYEBROW PENCIL -->
+    <div class="g-row">
+      <div class="ph w-full h-md c-ivory">
+        <div class="ph-label"><span class="ph-num">26</span><span class="ph-tag">Image 26 — Full Width</span></div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end .gallery -->
+
+  <!-- ─── BEHIND THE SCENE ────────────────────────────────── -->
+  <div class="section-block">
+    <h2>Behind the Scene</h2>
+    <div class="caption-grid">
+      <div class="caption-item">
+        <div class="ph h-sm c-warm" style="width:100%;">
+          <div class="ph-label"><span class="ph-num">27</span><span class="ph-tag">Image 27</span></div>
+        </div>
+        <p class="caption-text">Product Shooting</p>
+      </div>
+      <div class="caption-item">
+        <div class="ph h-sm c-blush" style="width:100%;">
+          <div class="ph-label"><span class="ph-num">28</span><span class="ph-tag">Image 28</span></div>
+        </div>
+        <p class="caption-text">It was my first day of internship!</p>
+      </div>
+      <div class="caption-item">
+        <div class="ph h-sm c-mauve" style="width:100%;">
+          <div class="ph-label"><span class="ph-num">29</span><span class="ph-tag">Image 29</span></div>
+        </div>
+        <p class="caption-text">Color matching for color swatches</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── THE TEAM ────────────────────────────────────────── -->
+  <div class="section-block">
+    <h2>The Team</h2>
+    <div class="caption-grid">
+      <div class="caption-item">
+        <div class="ph h-sm c-lavender" style="width:100%;">
+          <div class="ph-label"><span class="ph-num">30</span><span class="ph-tag">Image 30</span></div>
+        </div>
+        <p class="caption-text">Summer Interns<br/><em>(Samantha Liu, Alexa Chen, Maryam Ali, Myself)</em></p>
+      </div>
+      <div class="caption-item">
+        <div class="ph h-sm c-rose" style="width:100%;">
+          <div class="ph-label"><span class="ph-num">31</span><span class="ph-tag">Image 31</span></div>
+        </div>
+        <p class="caption-text">Shoutout to the best team ever! My manager Gabby, in-house graphic Designer Lauren, and front desk exceptional Amber. They are the best people to work with.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      })
+    );
+  </script>
+
+</body>
+</html>
