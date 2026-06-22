@@ -1496,24 +1496,39 @@
       const show = cards.filter(c => filter === 'all' || c.dataset.category === filter);
       const hide = cards.filter(c => filter !== 'all' && c.dataset.category !== filter);
 
-      // Fade all visible cards out first
-      cards.forEach(c => { c.style.transition = 'opacity 0.18s ease'; c.style.opacity = '0'; });
+      // Fade out only currently visible cards
+      const visible = cards.filter(c => c.style.display !== 'none');
+      visible.forEach(c => {
+        c.style.transition = 'opacity 0.2s ease';
+        c.style.opacity = '0';
+      });
 
       setTimeout(() => {
         // Switch display
         hide.forEach(c => { c.style.display = 'none'; });
-        show.forEach(c => { c.style.display = ''; c.style.opacity = '0'; });
-
-        // Stagger them back in
-        show.forEach((c, i) => {
-          setTimeout(() => {
-            c.style.transition = 'opacity 0.22s ease';
-            c.style.opacity = '1';
-          }, i * 60);
+        show.forEach(c => {
+          c.style.transition = 'none';
+          c.style.opacity = '0';
+          c.style.display = '';
         });
 
-        setTimeout(() => { filterLock = false; }, show.length * 60 + 220);
-      }, 190);
+        // Force reflow so transition fires
+        show[0] && show[0].getBoundingClientRect();
+
+        // Stagger fade in, then clean up inline styles so hover works normally
+        show.forEach((c, i) => {
+          setTimeout(() => {
+            c.style.transition = 'opacity 0.3s ease';
+            c.style.opacity = '1';
+            setTimeout(() => {
+              c.style.transition = '';
+              c.style.opacity = '';
+            }, 350);
+          }, i * 70);
+        });
+
+        setTimeout(() => { filterLock = false; }, show.length * 70 + 360);
+      }, 220);
     });
   });
 
