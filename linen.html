@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linen — Dora Hu Design</title>
+  <meta name="description" content="Linen — AI-powered fashion app. A senior capstone project by Dora Hu." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #F88955;
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --light-gray: #f5f5f5;
+      --border: #e8e8e8;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.5; }
+
+    /* Hamburger — hidden on desktop */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 9999;
+      position: relative;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 620px) {
+      nav { padding: 1rem 1.5rem; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 9000;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
+
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      padding: 4rem 6rem 4rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 4rem;
+      margin-top: 2.5rem;
+    }
+
+    .hero-description {
+      flex: 1;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .hero-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      min-width: 220px;
+    }
+
+    .hero-detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .detail-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .detail-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* ─── HERO BANNER ────────────────────────────────────── */
+    .hero-banner {
+      margin-top: 60px;
+      width: 100%;
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ─── PAGE TITLE ─────────────────────────────────────── */
+    .page-title {
+      text-align: left;
+      padding: 3.5rem 3rem 2.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .page-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .page-title h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      line-height: 1.05;
+    }
+
+    /* ─── META SECTION ────────────────────────────────────── */
+    .meta-section {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+      gap: 2rem 6rem;
+    }
+
+    .meta-left { display: flex; flex-direction: column; gap: 1.6rem; }
+    .meta-right { display: flex; flex-direction: column; gap: 1.6rem; }
+
+    .meta-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.55rem;
+    }
+
+    .meta-text {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.72;
+    }
+
+    .meta-text + .meta-text { margin-top: 0.75rem; }
+
+    .roles-link {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .proto-anchor {
+      width: 110px;
+      height: 110px;
+      position: relative;
+    }
+
+    .proto-circle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      text-decoration: none;
+      transition: box-shadow 0.3s ease, background 0.2s ease;
+    }
+
+    .proto-circle-btn:hover {
+      background: var(--orange);
+    }
+
+    /* ─── THE PROBLEM ─────────────────────────────────────── */
+    .problem-band {
+      background: #FFF3D6;
+      padding: 4rem 6rem;
+    }
+
+    .problem-heading {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--orange);
+      margin-bottom: 1.25rem;
+    }
+
+    .problem-intro {
+      font-size: 1.05rem;
+      color: var(--black);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+    }
+
+    .problem-highlight {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .problem-list {
+      list-style: decimal;
+      padding-left: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .problem-list li {
+      font-size: 1.05rem;
+      color: var(--black);
+      line-height: 1.7;
+    }
+
+    .problem-underline {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ─── CONTENT WRAPPER ─────────────────────────────────── */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ─── SOLUTION FEATURE ────────────────────────────────── */
+    .sol-feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 5rem 6rem;
+      gap: 1.5rem;
+    }
+
+    .sol-feature-label {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 1rem;
+    }
+
+    .sol-feature-num {
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .sol-feature-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .sol-feature-desc {
+      font-size: 1.1rem;
+      color: var(--black);
+      line-height: 1.65;
+      max-width: 340px;
+      margin-bottom: 2rem;
+    }
+
+    .sol-dot {
+      display: block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--black);
+    }
+
+    .sol-feature-img {
+      display: flex;
+      justify-content: center;
+    }
+
+    .sol-feature-img img {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      display: block;
+    }
+
+    .sol-feature-flip {
+      direction: rtl;
+    }
+    .sol-feature-flip > * {
+      direction: ltr;
+    }
+
+    @media (max-width: 768px) {
+      .sol-feature { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .sol-feature-flip { direction: ltr; }
+    }
+
+    /* ─── RESEARCH SECTION ───────────────────────────────── */
+    .research-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      border-bottom: none;
+    }
+
+    .research-heading {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 1.25rem;
+      line-height: 1.1;
+    }
+
+    .research-num {
+      color: var(--orange);
+      font-weight: 800;
+    }
+
+    .research-desc {
+      font-size: 1rem;
+      color: var(--black);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .research-pain-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+    }
+
+    .research-pain-list {
+      list-style: decimal;
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .research-pain-list li {
+      font-size: 1rem;
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    .research-right img {
+      width: 75%;
+      height: auto;
+      border-radius: 16px;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .research-section { grid-template-columns: 1fr; }
+    }
+
+    /* ─── COMPETITIVE ANALYSIS ───────────────────────────── */
+    .comp-analysis-section {
+      background: var(--white);
+    }
+
+    .comp-analysis-heading {
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 1.25rem;
+      line-height: 1.2;
+    }
+
+    .comp-analysis-desc {
+      font-size: 1rem;
+      color: var(--black);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .comp-analysis-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      counter-reset: comp-counter;
+    }
+
+    .comp-analysis-list li {
+      counter-increment: comp-counter;
+      display: flex;
+      gap: 0.75rem;
+      font-size: 1rem;
+      color: var(--black);
+      line-height: 1.65;
+    }
+
+    .comp-analysis-list li::before {
+      content: counter(comp-counter) ".";
+      color: var(--black);
+      font-weight: 400;
+      flex-shrink: 0;
+    }
+
+    /* ─── COMP CARDS ─────────────────────────────────────── */
+    .comp-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .comp-item {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      border: 1.5px solid var(--border);
+    }
+
+    .comp-item.alt { background: var(--white); border-color: var(--border); }
+
+    .comp-item-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .comp-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comp-item-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .comp-item-desc {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.65;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.25rem;
+    }
+
+    .comp-sw {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .comp-sw-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .comp-sw-col:first-child .comp-sw-label { color: #22a06b; }
+    .comp-sw-col:last-child .comp-sw-label { color: #d63b1f; }
+
+    .comp-sw-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .comp-sw-list li {
+      font-size: 0.85rem;
+      color: var(--black);
+      line-height: 1.55;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .comp-sw-list li::before {
+      content: '•';
+      color: var(--gray);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .comp-cards { grid-template-columns: 1fr; }
+    }
+
+    .research-stats-section {
+      border-top: none;
+      border-bottom: none;
+    }
+
+    /* ─── IDEATION SECTION ───────────────────────────────── */
+    .ideation-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      align-items: start;
+      gap: 3rem 4rem;
+      border-bottom: none;
+    }
+
+    .userflow-text {
+      align-self: start;
+    }
+
+    .ideation-left .section-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .ideation-left .section-body {
+      font-size: 1rem;
+      max-width: 100%;
+    }
+
+    .ideation-flow-img {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .ideation-flow-img img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .ideation-section { grid-template-columns: 1fr; }
+    }
+
+    /* ─── USERFLOW SECTION ───────────────────────────────── */
+    .userflow-section {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      align-items: center;
+      gap: 4rem;
+      border-top: none;
+      border-bottom: none;
+    }
+
+    .userflow-heading {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+    }
+
+    .userflow-right img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .userflow-section { grid-template-columns: 1fr; }
+    }
+
+    /* ─── DESIGN TAKEAWAYS ───────────────────────────────── */
+    .design-takeaways {
+      margin-top: 2rem;
+    }
+
+    .takeaway-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .takeaway-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .takeaway-list li {
+      font-size: 0.95rem;
+      color: var(--black);
+      line-height: 1.65;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .takeaway-list li::before {
+      content: '•';
+      color: var(--black);
+      flex-shrink: 0;
+    }
+
+    /* ─── SYNTHESIZE ─────────────────────────────────────── */
+    .synthesize-section {
+      margin-top: 2.5rem;
+    }
+
+    .synthesize-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2rem;
+    }
+
+    .synthesize-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 4rem;
+    }
+
+    .syn-item {
+      padding: 1.25rem;
+      background: var(--white);
+      border-radius: 14px;
+      border: 1.5px solid #e0e0e0;
+    }
+
+    .syn-cat {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--orange);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .syn-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .syn-list li {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.65;
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .syn-list li::before {
+      content: '•';
+      color: var(--orange);
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .synthesize-grid { grid-template-columns: 1fr; }
+      .synthesize-section { padding: 1.5rem; }
+    }
+
+    /* ─── BACK TO TOP ────────────────────────────────────── */
+    .back-to-top {
+      position: sticky;
+      bottom: 2rem;
+      float: right;
+      margin-right: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--white);
+      color: #aaa;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 1.5px solid #d0d0d0;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+      z-index: 100;
+    }
+
+    .back-to-top:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      transform: translateY(-3px);
+    }
+
+    /* ─── PROCESS BAR ────────────────────────────────────── */
+    .process-bar {
+      background: #FFF3D6;
+      padding: 3.5rem 6rem;
+      text-align: center;
+    }
+
+    .process-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2rem;
+    }
+
+    .process-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .process-step {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a.process-step:hover {
+      color: var(--orange);
+    }
+
+    .process-arrow {
+      color: var(--orange);
+      font-size: 1.2rem;
+    }
+
+    /* ─── BUSINESS INSIGHT ───────────────────────────────── */
+    .business-insight {
+      padding: 5rem 6rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .bi-line1 {
+      font-size: 1rem;
+      color: var(--gray);
+    }
+
+    .bi-line2, .bi-line3 {
+      font-size: 1.05rem;
+      color: var(--black);
+      line-height: 1.7;
+    }
+
+    .bi-arrows {
+      font-size: 1.2rem;
+      color: var(--black);
+      margin-top: 0.5rem;
+      letter-spacing: 0.5rem;
+    }
+
+    /* ─── SECTION ─────────────────────────────────────────── */
+    .case-section {
+      padding: 5rem 6rem;
+      border-bottom: none;
+    }
+
+    .section-number {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-heading {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .section-body p + p { margin-top: 1rem; }
+
+    /* ─── PROBLEM SECTION ─────────────────────────────────── */
+    .problem-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .problem-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 1.75rem;
+    }
+
+    .problem-card .prob-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.75rem;
+    }
+
+    .problem-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .problem-card p {
+      font-size: 0.85rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─── SOLUTION CARDS ──────────────────────────────────── */
+    .solution-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .solution-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      background: var(--light-gray);
+      border-radius: 20px;
+      padding: 1.75rem 2rem;
+    }
+
+    .sol-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.5rem;
+    }
+
+    .sol-content h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+
+    .sol-content p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─── RESEARCH ────────────────────────────────────────── */
+    .research-stats {
+      display: flex;
+      gap: 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .stat-box {
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-box .stat-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-box .stat-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    .pain-points {
+      margin-top: 2.5rem;
+    }
+
+    .pain-points h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .pain-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      list-style: none;
+    }
+
+    .pain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--black);
+      line-height: 1.55;
+    }
+
+    .pain-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      margin-top: 0.45rem;
+    }
+
+    /* ─── COMPETITIVE ANALYSIS ────────────────────────────── */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .comp-card {
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .comp-card .comp-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .comp-row {
+      margin-bottom: 0.85rem;
+    }
+
+    .comp-row .row-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .row-label.strength { color: #22a06b; }
+    .row-label.weakness { color: #e5341b; }
+
+    .comp-row p {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── USER FLOW / IDEATION ────────────────────────────── */
+    .flow-pages {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .flow-page {
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 0.6rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* ─── TESTING ─────────────────────────────────────────── */
+    .testing-findings {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .finding-item {
+      border-left: 3px solid var(--orange);
+      padding-left: 1.25rem;
+    }
+
+    .finding-item .finding-cat {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.3rem;
+    }
+
+    .finding-item p {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─── DESIGN SYSTEM ───────────────────────────────────── */
+    .design-system {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .ds-block h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.85rem;
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .swatch {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .tool-chips {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .tool-chip {
+      background: var(--light-gray);
+      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* ─── REFLECTION ──────────────────────────────────────── */
+    .reflection-quote {
+      background: var(--orange);
+      border-radius: 24px;
+      padding: 3rem;
+      margin-top: 2.5rem;
+    }
+
+    .reflection-quote p {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    .reflection-quote .quote-mark {
+      font-size: 3rem;
+      line-height: 0.5;
+      font-weight: 800;
+      color: rgba(255,255,255,0.4);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      padding: 3rem 6rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .footer-logo img {
+      height: 32px;
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    footer .footer-links a {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    footer .footer-links a:hover { color: var(--black); }
+
+    footer .footer-date {
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+
+    /* ─── BACK LINK ───────────────────────────────────────── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray);
+      transition: color 0.2s;
+      padding: 1.5rem 6rem 0;
+    }
+
+    .back-link:hover { color: var(--black); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero, .case-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero-band { padding: 2rem 1.5rem; flex-direction: column; }
+      .hero-meta-row { flex-direction: column; gap: 2rem; }
+      .problem-cards, .comp-grid { grid-template-columns: 1fr; }
+      .research-stats { flex-wrap: wrap; }
+      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; }
+      .back-link { padding-left: 1.5rem; }
+
+      /* Stack meta section as single column in correct order */
+      .meta-section {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem 3rem;
+        gap: 0;
+      }
+      .meta-left, .meta-right {
+        display: contents;
+      }
+      /* Overview → Tools → Timeline → Roles → Prototype */
+      .meta-left .meta-block:nth-child(1) { order: 1; }  /* Overview */
+      .meta-left .meta-block:nth-child(2) { order: 2; }  /* Tools */
+      .meta-left .meta-block:nth-child(3) { order: 3; }  /* Timeline */
+      .meta-right .meta-block:nth-child(1) { order: 4; } /* Roles */
+      .meta-right .meta-block:nth-child(2) { order: 5; } /* Prototype */
+      .meta-section > .meta-left > .meta-block,
+      .meta-section > .meta-right > .meta-block {
+        margin-bottom: 1.6rem;
+      }
+    }
+  </style>
+  <script>
+    (function(){
+      var c=document.createElement("canvas");c.width=64;c.height=64;
+      var ctx=c.getContext("2d"),img=new Image();
+      img.onload=function(){
+        var pad=2,size=64-pad*2,sc=Math.min(size/img.width,size/img.height);
+        var w=img.width*sc,h=img.height*sc;
+        ctx.drawImage(img,(64-w)/2,(64-h)/2,w,h);
+        var l=document.createElement("link");l.rel="icon";l.type="image/png";
+        l.href=c.toDataURL("image/png");document.head.appendChild(l);
+      };img.src="HU_Logo.png";
+    })();
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXSVPXK3VE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXSVPXK3VE');
+  </script>
+  <link rel="stylesheet" href="BubbleMenu-v2.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="BubbleMenu-v2.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">
+      <img src="HU_Logo.png" alt="Dora Hu Design" />
+    </a>
+    <ul class="nav-links" id="nav-links">
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="#">Playground</a></li>
+    <li><a href="#">Photography</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <div class="hero-banner">
+    <img src="Linen-Hero-banner.png" alt="Linen Hero Banner" />
+  </div>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <span class="page-tag">Case Study</span>
+    <h1>Linen</h1>
+  </div>
+
+  <!-- META -->
+  <div class="meta-section">
+    <div class="meta-left">
+      <div class="meta-block">
+        <p class="meta-label">Overview</p>
+        <p class="meta-text">Linen is an AI-powered fashion app offering fashion advice, outfit generation based on preferences, virtual try-on, and an Instagram-style interface for fashion inspiration.</p>
+        <p class="meta-text">This project was created in collaboration with my classmate, Chisom M, for our Senior capstone project.</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Tools</p>
+        <p class="meta-text">Figma, Adobe Photoshop, Illustrator</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Timeline</p>
+        <p class="meta-text">Oct 2023 – Jan 2024</p>
+      </div>
+    </div>
+    <div class="meta-right">
+      <div class="meta-block">
+        <p class="meta-label">Roles</p>
+        <p class="meta-text">
+          <a class="roles-link" href="#">Product Design &amp; Art Director</a>: user experience and interface design, user research, prototyping, illustration, art direction
+        </p>
+      </div>
+      <div class="meta-block">
+        <div class="proto-anchor">
+          <a class="proto-circle-btn" href="https://www.figma.com/proto/6xxIp4ujxSiCeWLMgsWk1R/Linen-Fashion-App-Wireframe--Lo-fi---Hi-fi-prototype?content-scaling=fixed&kind=proto&node-id=4-9708&page-id=0%3A1&scaling=scale-down&starting-point-node-id=4%3A9708&t=tpk5XtbCKsAvcb8H-1" target="_blank" rel="noopener">View<br>Prototype</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM DETAIL -->
+  <section class="case-section" style="background:#FFF3D6;">
+    <p class="section-number">The Problem</p>
+    <h2 class="section-heading">What's standing between college students and their best look?</h2>
+    <p class="section-body">
+      Through user research interviews with 18–25 year-olds, we identified three recurring pain points that made getting dressed every day more stressful than it needed to be.
+    </p>
+    <div class="problem-cards">
+      <div class="problem-card">
+        <p class="prob-num">01</p>
+        <h3>Outfit Selection Difficulty</h3>
+        <p>Choosing an outfit takes too much time and mental energy, especially when balancing a busy academic schedule.</p>
+      </div>
+      <div class="problem-card">
+        <p class="prob-num">02</p>
+        <h3>Financial Constraints</h3>
+        <p>Limited budgets make it hard to explore new styles or buy pieces that truly work together — leading to underused wardrobes.</p>
+      </div>
+      <div class="problem-card">
+        <p class="prob-num">03</p>
+        <h3>Trend Awareness Gaps</h3>
+        <p>Choosing the right outfit for the right occasion — interviews, dates, social events — is a persistent source of anxiety.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION 01 -->
+  <div class="sol-feature">
+    <div class="sol-feature-img">
+      <img src="Linen-solution-1.gif" alt="Linen Solution 1 - AI Outfit Generation" />
+    </div>
+    <div class="sol-feature-text">
+      <p class="sol-feature-label">{Solution}</p>
+      <p class="sol-feature-num">01</p>
+      <p class="sol-feature-desc">Use AI technology to generate outfits based on occasions and personal preferences</p>
+    </div>
+  </div>
+
+  <!-- SOLUTION 02 -->
+  <div class="sol-feature">
+    <div class="sol-feature-img">
+      <img src="Linen-solution-2.gif" alt="Linen Solution 2 - 3D Digitization" />
+    </div>
+    <div class="sol-feature-text">
+      <p class="sol-feature-label">{Solution}</p>
+      <p class="sol-feature-num">02</p>
+      <p class="sol-feature-desc">Digitize personal items into 3D objects and enable virtual try-on to save time</p>
+    </div>
+  </div>
+
+  <!-- SOLUTION 03 -->
+  <div class="sol-feature">
+    <div class="sol-feature-img">
+      <img src="Linen-solution-3.gif" alt="Linen Solution 3 - Community Feed" />
+    </div>
+    <div class="sol-feature-text">
+      <p class="sol-feature-label">{Solution}</p>
+      <p class="sol-feature-num">03</p>
+      <p class="sol-feature-desc">Instagram-like community to get inspired from around the world</p>
+    </div>
+  </div>
+
+  <!-- BUSINESS INSIGHT -->
+  <div class="business-insight">
+    <p class="bi-line1">As a design student with a business minor...</p>
+    <p class="bi-line2">I wanted to go beyond just incorporating nice features<br>and add something that can benefit the business.</p>
+    <p class="bi-line3">So, I added an in-app shopping feature to enhance the<br>user experience and contribute to the overall benefit of<br>the business.</p>
+    <p class="bi-arrows">↓ &nbsp; ↓</p>
+  </div>
+
+  <!-- SOLUTION 04 -->
+  <div class="sol-feature">
+    <div class="sol-feature-img">
+      <img src="Linen-solution-4.gif" alt="Linen Solution 4 - AR Try-on and In-app Shopping" />
+    </div>
+    <div class="sol-feature-text">
+      <p class="sol-feature-label">{Solution}</p>
+      <p class="sol-feature-num">04</p>
+      <h3 class="sol-feature-title">AR try-on and In-app shopping</h3>
+      <p class="sol-feature-desc" style="font-size:0.95rem;">Shop owners can share products as 3D objects for users to virtually try on. This helps users establish a deeper connection with the product, enabling better conversion. Additionally, by adding items to the wishlist, users can shop within the app.</p>
+    </div>
+  </div>
+
+
+  <!-- PROCESS BAR -->
+  <div class="process-bar">
+    <h2 class="process-title">Process</h2>
+    <div class="process-steps">
+      <a class="process-step" href="#research">Research</a>
+      <span class="process-arrow">→</span>
+      <a class="process-step" href="#ideation">Ideation</a>
+      <span class="process-arrow">→</span>
+      <a class="process-step" href="#design">Lo-fi Prototype</a>
+      <span class="process-arrow">→</span>
+      <a class="process-step" href="#user-testing">User Testing</a>
+      <span class="process-arrow">→</span>
+      <a class="process-step" href="#hifi">Hi-fi Prototype</a>
+      <span class="process-arrow">→</span>
+      <a class="process-step" href="#reflection">Reflection</a>
+    </div>
+  </div>
+
+  <!-- 01 RESEARCH -->
+  <section class="case-section research-section" id="research">
+    <div class="research-left">
+      <p class="section-number"><span class="research-num">01.</span> Research</p>
+      <h2 class="section-heading">Understanding the user</h2>
+      <p class="section-body">We conducted five user interviews with current college students aged 18–25.</p>
+      <p class="section-body" style="margin-top:1rem; font-weight:600; color:var(--black);">3 main pain points:</p>
+      <ol class="research-pain-list">
+        <li>Time consuming</li>
+        <li>Financial constraints</li>
+        <li>Hard time selecting suitable outfits</li>
+      </ol>
+    </div>
+    <div class="research-right">
+      <img src="Linen-Research-01.png" alt="Research session with sticky notes" />
+    </div>
+  </section>
+
+
+  <!-- COMPETITIVE ANALYSIS -->
+  <section class="case-section comp-analysis-section">
+    <p class="section-number">Competitive Analysis</p>
+    <h2 class="section-heading">Finding inspiration from competitors</h2>
+    <p class="section-body">I researched some competitors' app to find inspiration. What I took away were:</p>
+    <ol class="comp-analysis-list" style="margin-top:1rem;">
+      <li>Grouping information together using cards can best utilize space.</li>
+      <li>Having a familiar user interface helps users adopt more quickly.</li>
+      <li>Incorporating a section for user-generated content enhances engagement and promotes user stickiness.</li>
+    </ol>
+
+    <div class="comp-cards">
+
+      <!-- Nike -->
+      <div class="comp-item">
+        <div class="comp-item-header">
+          <div class="comp-icon" style="background:transparent; border:none;">
+            <img src="Linen-research-icon-01.png" alt="Nike icon" style="width:56px;height:56px;border-radius:14px;object-fit:cover;" />
+          </div>
+          <p class="comp-item-name">Nike Virtual View</p>
+        </div>
+        <p class="comp-item-desc">Nike Virtual View on FinishLine.com lets shoppers preview clothing on 3D holograms of models in WebAR.</p>
+        <div class="comp-sw">
+          <div class="comp-sw-col">
+            <p class="comp-sw-label">Strengths</p>
+            <ul class="comp-sw-list">
+              <li>AR try-on features</li>
+              <li>Easy access to web-based AR</li>
+            </ul>
+          </div>
+          <div class="comp-sw-col">
+            <p class="comp-sw-label">Weaknesses</p>
+            <ul class="comp-sw-list">
+              <li>Lack of personalized options</li>
+              <li>Lack of variety (brands, choices)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acloset -->
+      <div class="comp-item alt">
+        <div class="comp-item-header">
+          <div class="comp-icon" style="background:transparent; border:none;">
+            <img src="Linen-research-icon-02.png" alt="Acloset icon" style="width:56px;height:56px;border-radius:14px;object-fit:cover;" />
+          </div>
+          <p class="comp-item-name">Acloset</p>
+        </div>
+        <p class="comp-item-desc">Acloset is an AI-powered fashion app that helps you manage your closet, create outfits, get style recommendations, and buy and sell pre-loved clothes.</p>
+        <div class="comp-sw">
+          <div class="comp-sw-col">
+            <p class="comp-sw-label">Strengths</p>
+            <ul class="comp-sw-list">
+              <li>AI-powered</li>
+              <li>Digital closet</li>
+              <li>Outfit recommendations</li>
+              <li>Pre-loved marketplace</li>
+            </ul>
+          </div>
+          <div class="comp-sw-col">
+            <p class="comp-sw-label">Weaknesses</p>
+            <ul class="comp-sw-list">
+              <li>Lack of personalized options</li>
+              <li>Lack of try-on feature</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aiuta -->
+      <div class="comp-item">
+        <div class="comp-item-header">
+          <div class="comp-icon" style="background:transparent; border:none;">
+            <img src="Linen-research-icon-03.png" alt="Aiuta icon" style="width:56px;height:56px;border-radius:14px;object-fit:cover;" />
+          </div>
+          <p class="comp-item-name">Aiuta</p>
+        </div>
+        <p class="comp-item-desc">Aiuta is a fashion-tech app that uses AI to help users express their personality through style.</p>
+        <div class="comp-sw">
+          <div class="comp-sw-col">
+            <p class="comp-sw-label">Strengths</p>
+            <ul class="comp-sw-list">
+              <li>AI-powered</li>
+              <li>Virtual try-on using images</li>
+              <li>AI stylist feedback</li>
+            </ul>
+          </div>
+          <div class="comp-sw-col">
+            <p class="comp-sw-label">Weaknesses</p>
+            <ul class="comp-sw-list">
+              <li>Bad user experience</li>
+              <li>Lack of user-generated content</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 IDEATION -->
+  <section class="case-section ideation-section" id="ideation">
+    <div class="ideation-left">
+      <p class="section-number">02 — Ideation</p>
+      <h2 class="section-heading">From sketches to structure</h2>
+      <p class="section-body">
+        We began with low-fidelity sketches and peer collaboration sessions to explore a wide range of interaction models. Ideas were stress-tested against our research findings before narrowing down to a core user flow.
+      </p>
+      <p class="section-body" style="margin-top:1rem;">
+        The user flow was mapped across five key pages — covering the complete journey from onboarding through AI generation, virtual try-on, community browsing, and closet management.
+      </p>
+    </div>
+    <div class="ideation-flow-img">
+      <img src="Linen-Ideation-01.png" alt="Linen Ideation Sketches" />
+      <div class="flow-pages">
+        <span class="flow-page">Onboarding</span>
+        <span class="flow-page">AI Outfit Generator</span>
+        <span class="flow-page">Virtual Try-On</span>
+        <span class="flow-page">Explore Feed</span>
+        <span class="flow-page">My Closet</span>
+      </div>
+    </div>
+    <div class="userflow-text">
+      <h3 class="userflow-heading">Userflow</h3>
+      <p class="section-body" style="margin-top:0.5rem;">We mapped out the system and divided it into 5 sub pages: Homepage, Explore Page, Generate Outfit Page, My Closet Page, and Profile Page.</p>
+    </div>
+    <div class="ideation-flow-img">
+      <img src="Linen-Ideation-02.png" alt="Linen User Flow Diagram" />
+    </div>
+  </section>
+
+  <!-- 03 DESIGN -->
+  <section class="case-section" id="design">
+    <p class="section-number">03 — Design</p>
+    <h2 class="section-heading">Wireframes &amp; lo-fi prototype</h2>
+    <p class="section-body">
+      Low-fidelity wireframes were created in Figma and tested with real users before any visual styling was applied. This ensured that core interaction patterns and information hierarchy were sound before investing in high-fidelity execution.
+    </p>
+    <p class="section-body" style="margin-top:1rem;">
+      Lo-fi prototype testing revealed that users expected the AI generator to surface on the home screen — not buried in a secondary tab — and that the closet management flow needed to be reordered to match mental models around getting dressed.
+    </p>
+    <div class="design-system">
+      <div class="ds-block">
+        <h3>Tools Used</h3>
+        <div class="tool-chips">
+          <span class="tool-chip">Figma</span>
+          <span class="tool-chip">Adobe Photoshop</span>
+          <span class="tool-chip">Adobe Illustrator</span>
+        </div>
+      </div>
+    </div>
+    <img src="Linen-Design-01.png" alt="Linen Wireframes" style="width:100%; height:auto; border-radius:16px; margin-top:2.5rem; display:block;" />
+
+    <div class="design-takeaways">
+      <p class="takeaway-title">User Testing Takeaways :</p>
+      <ul class="takeaway-list">
+        <li>Include all the steps for the main user flows that the user will take, including pop-up screens, etc.</li>
+        <li>Ensure clear identification by labeling significant buttons, such as 'Try-on'.</li>
+      </ul>
+    </div>
+    <img src="Linen-Design-02.png" alt="Linen Design" style="width:100%; height:auto; border-radius:16px; margin-top:2rem; display:block;" />
+
+    <div class="design-takeaways" style="margin-top:2rem;">
+      <p class="takeaway-title">User Testing Takeaways :</p>
+      <ul class="takeaway-list">
+        <li>Incorporate onboarding pages to help users understand the app's purpose and functionality.</li>
+        <li>Not every button needs to be functional, prioritize functionality for the main user flows.</li>
+        <li>The camera has three functions – scan, AR try-on, and digitalize. The functionality of the camera is a bit confusing. Differentiate when to use each function.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 04 USER TESTING -->
+  <section class="case-section" id="user-testing">
+    <p class="section-number">04 — User Testing</p>
+    <h2 class="section-heading">1:1 moderated usability sessions</h2>
+    <p class="section-body">
+      Three participants completed moderated usability sessions — conducted both in-person and remotely via Zoom. Tasks covered the full product journey: onboarding, outfit generation, closet management, and social browsing.
+    </p>
+    <img src="Linen-User-Testing-01.png" alt="User Testing" style="width:70%; height:auto; border-radius:16px; margin-top:2rem; display:block;" />
+    <img src="Linen-User-Testing-02.png" alt="User Testing 02" style="width:100%; height:auto; border-radius:16px; margin-top:2rem; display:block;" />
+    <img src="Linen-User-Testing-03.png" alt="User Testing 03" style="width:100%; height:auto; border-radius:16px; margin-top:2rem; display:block;" />
+
+    <div class="synthesize-section">
+      <h3 class="synthesize-title">Synthesize findings:</h3>
+      <div class="synthesize-grid">
+        <div class="syn-item">
+          <p class="syn-cat">User Interface</p>
+          <ul class="syn-list">
+            <li>Change the layout and reorganize information</li>
+            <li>Remove the pattern from the background</li>
+          </ul>
+        </div>
+        <div class="syn-item">
+          <p class="syn-cat">Sign Up Page</p>
+          <ul class="syn-list">
+            <li>Incorporate onboarding pages to help users understand the app's purpose and functionality</li>
+          </ul>
+        </div>
+        <div class="syn-item">
+          <p class="syn-cat">Explore Page</p>
+          <ul class="syn-list">
+            <li>Replace the camera icon with a new one to represent the 'scan' feature</li>
+          </ul>
+        </div>
+        <div class="syn-item">
+          <p class="syn-cat">Home Page</p>
+          <ul class="syn-list">
+            <li>Remove the search bar on the top</li>
+            <li>Add shop to the home page to showcase the 'shop feature'</li>
+          </ul>
+        </div>
+        <div class="syn-item">
+          <p class="syn-cat">My Closet Page</p>
+          <ul class="syn-list">
+            <li>There are too many features on the page, try to simplify and stay within the scope</li>
+          </ul>
+        </div>
+        <div class="syn-item">
+          <p class="syn-cat">Generate Outfit Page</p>
+          <ul class="syn-list">
+            <li>Change the overall layout, the information presented is confusing</li>
+            <li>Prioritize the buttons, CTA should be the biggest</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 HI-FI PROTOTYPE -->
+  <section class="case-section" id="hifi" style="border-color: transparent;">
+    <p class="section-number">05 — Hi-fi Prototype</p>
+    <h2 class="section-heading">The final design system &amp; interactive prototype</h2>
+    <img src="Linen-hifi-prototype-design-system.png" alt="Linen Hi-fi Design System" style="width:75%; height:auto; border-radius:16px; margin-top:2rem; display:block;" />
+    <img src="Linen-hifi-prototype-screens.png" alt="Linen Hi-fi Prototype Screens" style="width:100%; height:auto; border-radius:16px; margin-top:2rem; display:block;" />
+    <div style="margin-top:2rem; border-radius:16px; overflow:hidden;">
+      <iframe style="border: 1px solid rgba(0, 0, 0, 0.1); display:block;" width="100%" height="450" src="https://embed.figma.com/proto/6xxIp4ujxSiCeWLMgsWk1R/Linen-Fashion-App-Wireframe--Lo-fi---Hi-fi-prototype?content-scaling=fixed&kind=proto&node-id=4-9708&page-id=0%3A1&scaling=scale-down&starting-point-node-id=4%3A9708&embed-host=share" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- 06 REFLECTION -->
+  <section class="case-section" id="reflection" style="border-color: transparent;">
+    <p class="section-number">06 — Reflection</p>
+    <h2 class="section-heading">What I learned</h2>
+    <p class="section-body">
+      Throughout the process, I learned that user testing is key to UX design, and asking the right questions will keep me on the right track because we are designing for the users, not for ourselves. I challenged myself to think of many iterations and test them with users. I found talking to my users very enjoyable because every time I can learn a new perspective from them and discover a new way to solve the problem. If I have more time, I would continue to gather user feedback and make improvements.
+    </p>
+  </section>
+
+
+
+  <!-- BACK TO TOP -->
+  <a class="back-to-top" href="#" aria-label="Back to top">↑</a>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

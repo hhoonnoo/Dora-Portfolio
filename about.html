@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Dora Hu Design</title>
+  <meta name="description" content="About Dora Hu — Graphic Designer based in the Washington D.C. area." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.5; }
+
+    /* ─── MAIN LAYOUT ─────────────────────────────────────── */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      padding: 7rem 5rem 5rem;
+      gap: 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ─── LEFT: PHOTO ─────────────────────────────────────── */
+    .photo-col {
+      flex: 0 0 400px;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: 360px;
+      z-index: 2;
+    }
+
+    .photo-frame img.main-photo {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 200px 200px 20px 20px;
+      display: block;
+    }
+
+    /* decorative shapes */
+    .deco {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    /* yellow starburst — top left */
+    .deco-star {
+      top: -30px;
+      left: -60px;
+      width: 80px;
+      height: 80px;
+      z-index: 3;
+    }
+
+    /* orange flower — top right */
+    .deco-flower {
+      top: -20px;
+      right: -50px;
+      width: 90px;
+      height: 90px;
+      z-index: 3;
+    }
+
+    /* blue spiral — bottom left */
+    .deco-spiral {
+      bottom: 60px;
+      left: -55px;
+      width: 75px;
+      height: 75px;
+      z-index: 3;
+    }
+
+    /* pink rectangle — bottom left */
+    .deco-rect {
+      bottom: 0;
+      left: -10px;
+      width: 100px;
+      height: 90px;
+      background: #f5b8c4;
+      z-index: 1;
+      border-radius: 4px;
+    }
+
+    /* green dots — right side */
+    .deco-dots {
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 3;
+    }
+
+    .deco-dots span {
+      display: block;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #4caf50;
+    }
+
+    /* ─── RIGHT: TEXT ─────────────────────────────────────── */
+    .text-col {
+      flex: 1;
+    }
+
+    .text-col h1 {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 2.2rem;
+      color: #1a1a1a;
+    }
+
+    .bio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .bio-item {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: #1a1a1a;
+    }
+
+    .contact-label {
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 0.85rem;
+      color: #1a1a1a;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .contact-links a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #3a8fa0;
+      transition: opacity 0.2s;
+    }
+
+    .contact-links a:hover { opacity: 0.65; }
+
+    .resume-note {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #9b9b9b;
+    }
+
+    /* ─── HAMBURGER ───────────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 9999;
+      position: relative;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 620px) {
+      nav { padding: 1rem 1.5rem; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 9000;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1a1a1a;
+      }
+
+      .nav-hamburger { display: flex; }
+
+      .page {
+        flex-direction: column;
+        align-items: center;
+        padding: 6rem 2rem 4rem;
+        gap: 3rem;
+      }
+
+      .photo-col { flex: none; }
+
+      .photo-frame { width: 280px; }
+
+      .photo-frame img.main-photo { height: 340px; }
+    }
+  </style>
+  <script>
+    (function(){
+      var c=document.createElement("canvas");c.width=64;c.height=64;
+      var ctx=c.getContext("2d"),img=new Image();
+      img.onload=function(){
+        var pad=2,size=64-pad*2,sc=Math.min(size/img.width,size/img.height);
+        var w=img.width*sc,h=img.height*sc;
+        ctx.drawImage(img,(64-w)/2,(64-h)/2,w,h);
+        var l=document.createElement("link");l.rel="icon";l.type="image/png";
+        l.href=c.toDataURL("image/png");document.head.appendChild(l);
+      };img.src="HU_Logo.png";
+    })();
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXSVPXK3VE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXSVPXK3VE');
+  </script>
+  <link rel="stylesheet" href="BubbleMenu-v2.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="BubbleMenu-v2.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">
+      <img src="HU_Logo.png" alt="Dora Hu Design" />
+    </a>
+    <ul class="nav-links" id="nav-links">
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="#">Playground</a></li>
+    <li><a href="#">Photography</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="page">
+
+    <!-- LEFT: photo with decorative shapes -->
+    <div class="photo-col">
+
+      <!-- photo -->
+      <div class="photo-frame">
+        <img class="main-photo" src="Dora-protrait.png" alt="Dora Hu" />
+      </div>
+
+    </div>
+
+    <!-- RIGHT: text -->
+    <div class="text-col">
+      <h1>Hi, I'm Dora!</h1>
+
+      <div class="bio-list">
+        <p class="bio-item">🧑‍💻 I'm an experienced Graphic Designer. Over the past couple of years, I've gained experience working in both agency-style and in-house environments.</p>
+        <p class="bio-item">🎓 I graduated from the University of Maryland, College Park, with a Bachelor of Arts in Graphic Design and a minor in General Business from the Smith School of Business.</p>
+        <p class="bio-item">🥢 I was born and raised in Taipei, Taiwan, and immigrated to the US with my family when I was 17 years old. Growing up with these cultural influences has given me a unique perspective.</p>
+        <p class="bio-item">🎨 My works are always colorful, vivid, and optimistic, aiming to inspire more people. I am constantly striving for fresh and creative visual storytelling. ✨</p>
+        <p class="bio-item">🧁 When I'm not designing, you can find me at a cute coffee shop, baking way too many cookies, getting my hands messy with clay, or learning how to code.</p>
+      </div>
+
+      <p class="contact-label">💡 Please feel free to get in touch!</p>
+      <div class="contact-links">
+        <a href="mailto:dorahudesign@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/dorahudesign" target="_blank" rel="noopener">Linkedin</a>
+      </div>
+      <p class="resume-note">Current résumé available upon request.*</p>
+    </div>
+
+  </main>
+
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

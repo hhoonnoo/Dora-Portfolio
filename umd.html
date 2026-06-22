@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UMD Graphic Design Internship — Dora Hu Design</title>
+  <meta name="description" content="University of Maryland Graphic Design Internship — Campaign Design, Illustration, and Design Consultation by Dora Hu." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #c1122a;
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --white: #ffffff;
+      --gap: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-size: 0.9rem; font-weight: 400; color: var(--black); transition: opacity 0.2s; }
+    .nav-links a:hover { opacity: 0.5; }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      background: none; border: none; padding: 4px; cursor: pointer; z-index: 9999;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px; background: var(--black);
+      border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 620px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none; position: fixed; top: 0; left: 0;
+        width: 100vw; height: 100vh; background: #fff;
+        flex-direction: column; align-items: center; justify-content: center;
+        gap: 2.5rem; z-index: 9000;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.6rem; font-weight: 700; }
+    }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero-strip { margin-top: 60px; background: #c1122a; }
+    .hero-strip img { width: 100%; height: auto; display: block; }
+
+    /* ─── PAGE TITLE ──────────────────────────────────────── */
+    .page-title { text-align: center; padding: 3.5rem 3rem 2.5rem; }
+    .page-title h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 400; letter-spacing: -0.01em;
+    }
+
+    /* ─── META ────────────────────────────────────────────── */
+    .meta-section {
+      display: grid; grid-template-columns: 1.8fr 1fr;
+      max-width: 860px; margin: 0 auto; padding: 0 3rem 4rem; gap: 2rem 6rem;
+    }
+    .meta-left, .meta-right { display: flex; flex-direction: column; gap: 1.6rem; }
+    .meta-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 0.55rem;
+    }
+    .meta-text { font-size: 1.05rem; font-weight: 400; color: var(--gray); line-height: 1.72; }
+    .roles-link { color: var(--accent); font-weight: 600; }
+
+    /* ─── GALLERY ─────────────────────────────────────────── */
+    .gallery { padding: 2.5rem 5rem 0; }
+    .g-row { display: flex; gap: var(--gap); margin-bottom: var(--gap); }
+
+    .ph {
+      position: relative; border-radius: 3px; overflow: hidden;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      background: #edeae6;
+    }
+    .ph img { display: block; }
+    .ph img.contain { object-fit: contain; }
+
+    /* ─── PROJECT BANDS ───────────────────────────────────── */
+    .project-band { margin-top: 2.5rem; }
+    .project-band-inner {
+      display: flex; align-items: flex-start; width: 100%;
+      gap: 2.5rem; padding: 2.2rem 3rem;
+    }
+    .project-band-title {
+      flex: 0 0 200px; font-size: 1.35rem; font-weight: 700;
+      line-height: 1.3; color: var(--black);
+    }
+    .project-band-desc {
+      flex: 1 1 0; font-size: 0.88rem; font-weight: 400;
+      color: var(--black); line-height: 1.8; opacity: 0.72;
+    }
+    .project-band-desc em {
+      font-style: normal; display: block; margin-top: 0; opacity: 0.8;
+    }
+
+    .band-salmon { background: #f29a8c; }
+    .band-teal   { background: #88ada4; }
+    .band-coral  { background: #c85555; }
+    .band-gold   { background: #f5d060; }
+
+    /* ─── SECTION BLOCKS ──────────────────────────────────── */
+    .section-block { padding: 3rem 3rem 2rem; }
+    .section-block h2 {
+      font-size: 1.2rem; font-weight: 700; color: var(--black);
+      margin-bottom: 1.5rem; text-align: center;
+    }
+    .caption-grid { display: flex; gap: var(--gap); }
+    .caption-item { flex: 1 1 0; }
+    .caption-item .ph { width: 100%; }
+    .caption-text {
+      margin-top: 0.6rem; font-size: 0.78rem; font-weight: 500;
+      color: var(--gray); text-align: center; line-height: 1.5;
+    }
+
+    /* ─── APIDA ROW (intro left + carousel right) ────────── */
+    .apida-row {
+      display: flex;
+      align-items: stretch;
+    }
+    .apida-intro {
+      flex: 0 0 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.2rem 2rem;
+    }
+    .apida-intro .project-band-title { margin-bottom: 0.5rem; }
+    .apida-intro .project-band-desc { flex: none; margin-bottom: 0.6rem; }
+    .apida-meta { display: flex; flex-direction: column; gap: 0; }
+    .apida-meta em {
+      font-style: normal; font-size: 0.88rem;
+      opacity: 0.72; line-height: 1.6;
+    }
+    .apida-row .carousel-wrap {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .apida-row .carousel {
+      padding-bottom: 0;
+      flex: 1 1 0;
+      height: 0;
+      min-height: 320px;
+    }
+    .apida-row .carousel-item {
+      height: 100%;
+    }
+    @media (max-width: 600px) {
+      .apida-row { flex-direction: column; margin-top: 0; }
+      .apida-intro { flex: none; padding: 2rem 1.5rem; }
+      .apida-row .carousel-wrap { flex: none; height: 320px; position: relative; padding: 0; }
+      .apida-row .carousel { height: 320px; min-height: unset; flex: none; }
+}
+
+    /* ─── CAROUSEL ───────────────────────────────────────── */
+    .carousel-wrap {
+      padding: 2.5rem 5rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel {
+      display: flex;
+      gap: var(--gap);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 1rem;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .carousel-item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      border-radius: 3px;
+      overflow: hidden;
+      height: 480px;
+    }
+    .carousel-item img {
+      height: 100%;
+      width: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ─── DESKTOP / LARGE SCREEN ─────────────────────────── */
+    @media (min-width: 1100px) {
+      .gallery { padding-left: 25%; padding-right: 25%; }
+      .section-block { padding-left: 25%; padding-right: 25%; }
+      .project-band-inner { padding-left: 25%; padding-right: 25%; }
+
+      /* Team section: 30% smaller than full width, centered */
+      #team-grid { max-width: 49%; margin: 0 auto; }
+
+      .carousel-wrap { padding-left: 25%; padding-right: 0; }
+
+      /* Convert stacked column rows to side-by-side on desktop */
+      .g-row { flex-direction: row !important; align-items: flex-start; flex-wrap: wrap; }
+      /* Images that were width:100% (column-stacked) get equal flex slots; basis:30% lets 5-item rows wrap 3+2 */
+      .g-row .ph[style*="width:100%"] { flex: 1 1 30% !important; width: auto !important; }
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      #team-grid { flex-direction: column; }
+      #team-grid .caption-item { flex: none; width: 100%; }
+    }
+    @media (max-width: 700px) {
+      #scene-grid { flex-direction: column; }
+      #scene-grid .caption-item { flex: none; width: 100%; }
+      .project-band-inner { flex-direction: column; gap: 0.75rem; }
+      .project-band-title { flex: none; }
+    }
+    @media (max-width: 768px) {
+      #team-grid { max-width: 70%; margin: 0 auto; }
+      .hero-strip { height: auto; }
+      .page-title { padding: 2.5rem 1.5rem 1.5rem; }
+      .meta-section { grid-template-columns: 1fr; padding: 0 1.5rem 3rem; gap: 1.5rem 0; }
+      .gallery { padding: 1.5rem 1rem 0; }
+      .g-row { flex-wrap: wrap; }
+      .section-block { padding: 2rem 1.5rem 1.5rem; }
+      .caption-grid { flex-wrap: wrap; }
+      .caption-item { flex: 1 1 45%; }
+      .project-band-inner { padding: 1.5rem; }
+    }
+  </style>
+  <script>
+    (function(){
+      var c=document.createElement("canvas");c.width=64;c.height=64;
+      var ctx=c.getContext("2d"),img=new Image();
+      img.onload=function(){
+        var pad=2,size=64-pad*2,sc=Math.min(size/img.width,size/img.height);
+        var w=img.width*sc,h=img.height*sc;
+        ctx.drawImage(img,(64-w)/2,(64-h)/2,w,h);
+        var l=document.createElement("link");l.rel="icon";l.type="image/png";
+        l.href=c.toDataURL("image/png");document.head.appendChild(l);
+      };img.src="HU_Logo.png";
+    })();
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXSVPXK3VE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXSVPXK3VE');
+  </script>
+  <link rel="stylesheet" href="BubbleMenu-v2.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="BubbleMenu-v2.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">
+      <img src="HU_Logo.png" alt="Hu Logo" />
+    </a>
+    <ul class="nav-links" id="nav-links">
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="#">Playground</a></li>
+    <li><a href="#">Photography</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-strip">
+    <img src="UMD-img-00-hero.png" alt="Adele H. Stamp Student Union" />
+  </div>
+
+  <!-- TITLE -->
+  <div class="page-title">
+    <h1>University of Maryland</h1>
+  </div>
+
+  <!-- META -->
+  <div class="meta-section">
+    <div class="meta-left">
+      <div>
+        <p class="meta-label">Overview</p>
+        <p class="meta-text">During my time as a graphic design intern at the University of Maryland for the Stamp Student Union, I helped design ads, posters, flyers, and media graphics, and I was also able to promote diverse programs and events happening within the student times.</p>
+      </div>
+      <div>
+        <p class="meta-label">Tools</p>
+        <p class="meta-text">Adobe Illustrator, Photoshop, Procreate, Trello</p>
+      </div>
+    </div>
+    <div class="meta-right">
+      <div>
+        <p class="meta-label">Timeline</p>
+        <p class="meta-text">Jan – May 2024</p>
+      </div>
+      <div>
+        <p class="meta-label">Type</p>
+        <p class="meta-text">Internship</p>
+      </div>
+      <div>
+        <p class="meta-label">Role</p>
+        <p class="meta-text">
+          <a class="roles-link" href="#">Graphic Design Intern</a> — Campaign Design, Design Consultation, Illustration
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--  TO THE TABLE — intro left, carousel right  -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="apida-row">
+    <!-- Left: intro panel -->
+    <div class="apida-intro band-coral">
+      <div class="project-band-title">Asian, Pacific Islander &amp; Desi American Heritage Month 2024 (APIDA)</div>
+      <div class="project-band-desc">
+        "To the Table" is a campaign celebrating Asian, Pacific Islander, and Desi American Heritage Month 2024 at the University of Maryland. The Multicultural Inclusion Community and Advocacy (MICA) department chose the theme of "food gathering," emphasizing inclusion, welcome, vibrant chaos, and an abundance of food.
+      </div>
+      <div class="apida-meta">
+        <em>Client: Multicultural Inclusion Community and Advocacy (MICA)</em>
+        <em>Deliverables: Print, Digital, Merchandise, Apparel</em>
+      </div>
+    </div>
+    <!-- Right: carousel -->
+    <div class="carousel-wrap">
+      <div class="carousel" id="apida-carousel">
+        <div class="carousel-item"><img src="UMD-img-02.png" alt="To the Table campaign overview" /></div>
+        <div class="carousel-item"><img src="UMD-img-03.jpg" alt="To the Table main poster" /></div>
+        <div class="carousel-item"><img src="UMD-img-04.png" alt="To the Table phone mockup" /></div>
+        <div class="carousel-item"><img src="UMD-img-05.jpg" alt="To the Table schedule poster in window" /></div>
+        <div class="carousel-item"><img src="UMD-img-17.png" alt="Dora with To the Table poster" /></div>
+        <div class="carousel-item"><img src="UMD-img-15.jpg" alt="To the Table poster on easel" /></div>
+        <div class="carousel-item"><img src="UMD-img-16.png" alt="To the Table stickers on laptop" /></div>
+        <div class="carousel-item"><img src="UMD-img-18.jpg" alt="To the Table merchandise" /></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--  STUDY BUDDIES                             -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="apida-row">
+    <div class="apida-intro band-salmon">
+      <div class="project-band-title">Study Buddies</div>
+      <div class="project-band-desc">
+        "Study Buddies" is a University of Maryland campaign designed to promote the well-being of students by encouraging them to take regular breaks during finals. The campaign aims to reduce stress and enhance productivity by suggesting various relaxing and engaging activities during study sessions.
+      </div>
+      <div class="apida-meta">
+        <em>Client: Student Activities</em>
+        <em>Deliverables: Print, Digital</em>
+      </div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="study-carousel">
+        <div class="carousel-item"><img src="UMD-img-20.jpg" alt="Study Buddies poster" /></div>
+        <div class="carousel-item"><img src="UMD-img-21.png" alt="Dora with Study Buddies poster" /></div>
+        <div class="carousel-item"><img src="UMD-img-41.jpg" alt="Study Buddies poster on easel at Grand Ballroom" /></div>
+        <div class="carousel-item"><img src="UMD-img-22.png" alt="Study Buddies digital display" /></div>
+        <div class="carousel-item"><img src="UMD-img-23.png" alt="Study Buddies character sketch" /></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--  TERPS FOR CHANGE                          -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="apida-row">
+    <div class="apida-intro band-teal">
+      <div class="project-band-title">Terps for Change Sticker Designs</div>
+      <div class="project-band-desc">
+        Terps for Change (T4C) is a community service-learning program at the STAMP Student Union that partnered students with local nonprofits. They sought sticker designs to promote each focus area: Age &amp; Ageism, Education, Environmental Conservation, Food Justice &amp; Hunger, and Socioeconomic Inequity.
+      </div>
+      <div class="apida-meta">
+        <em>Client: Terps for Change</em>
+        <em>Deliverables: Die-cut Stickers</em>
+      </div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="t4c-carousel">
+        <div class="carousel-item"><img src="UMD-img-25.jpg" alt="Terps for Change — Environment sticker" /></div>
+        <div class="carousel-item"><img src="UMD-img-26.jpg" alt="Terps for Change — Food Justice sticker" /></div>
+        <div class="carousel-item"><img src="UMD-img-27.jpg" alt="Terps for Change — Education sticker" /></div>
+        <div class="carousel-item"><img src="UMD-img-28.jpg" alt="Terps for Change — Equity sticker" /></div>
+        <div class="carousel-item"><img src="UMD-img-29.jpg" alt="Terps for Change — Diversity sticker" /></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--  MARYLAND DAIRY                            -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="apida-row">
+    <div class="apida-intro band-gold">
+      <div class="project-band-title">Maryland Dairy Sticker</div>
+      <div class="project-band-desc">
+        I designed a sticker for Maryland Dairy featuring Kermit the Frog, created by Jim Henson — a distinguished UMD alumnus. We aimed to capture summertime fun and pay tribute to Henson's legacy of bringing joy to people worldwide.
+      </div>
+      <div class="apida-meta">
+        <em>Client: Maryland Dairy</em>
+        <em>Deliverables: Die-cut Stickers</em>
+      </div>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="dairy-carousel">
+        <div class="carousel-item"><img src="UMD-img-31.png" alt="Maryland Dairy Kermit sticker design" /></div>
+        <div class="carousel-item"><img src="UMD-img-32.png" alt="Maryland Dairy sticker on store front" /></div>
+        <div class="carousel-item"><img src="UMD-img-33.jpg" alt="Maryland Dairy store" /></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--  BEHIND THE SCENE                          -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section-block">
+    <h2>Behind the Scene</h2>
+    <div class="caption-grid" id="scene-grid" style="align-items:flex-start; flex-wrap:nowrap;">
+      <div class="caption-item" style="flex:1 1 0; min-width:0;">
+        <div class="ph" style="width:100%; height:340px;">
+          <img src="UMD-img-35.jpg" alt="The office" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <p class="caption-text">The office</p>
+      </div>
+      <div class="caption-item" style="flex:1 1 0; min-width:0;">
+        <div class="ph" style="width:100%; height:340px;">
+          <img src="UMD-img-36.jpg" alt="STAMP Marketing office" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <p class="caption-text">First day of Internship!</p>
+      </div>
+      <div class="caption-item" style="flex:1 1 0; min-width:0;">
+        <div class="ph" style="width:100%; height:340px;">
+          <img src="UMD-img-37.jpg" alt="Talking AIGA with students" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <p class="caption-text">Tabling event to engage with students</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--  THE TEAM                                  -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section-block" style="padding:0 0 4rem;">
+    <h2>The Team</h2>
+    <div class="caption-grid" id="team-grid">
+      <div class="caption-item">
+        <div class="ph" style="width:100%;height:auto;background:transparent;">
+          <img src="UMD-img-38.jpg" alt="Team group photos" style="width:100%;height:auto;display:block;" />
+        </div>
+      </div>
+      <div class="caption-item">
+        <div class="ph" style="width:100%;height:auto;background:transparent;">
+          <img src="UMD-img-39.jpg" alt="Graduation celebration" style="width:100%;height:auto;display:block;" />
+        </div>
+      </div>
+    </div>
+    <p class="caption-text" style="text-align:center; margin-top:1rem;">Pro Staff: Eva, Bree, Whitney, and Atin<br/><br/>Student designer: Chichi, Grace, Michael, Sarah, and Myself<br/><br/>I'm so thankful to be part of the marketing &amp; communication team! Everyone is so talented and caring, I've learned so much from each of them 🌟</p>
+  </div>
+
+
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      })
+    );
+  </script>
+
+</body>
+</html>

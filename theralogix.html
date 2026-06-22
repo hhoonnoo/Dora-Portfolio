@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theralogix — Dora Hu Design</title>
+  <meta name="description" content="Theralogix — Print & Digital Design, 3D Modeling, and Product Photography by Dora Hu." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --light-gray: #f5f5f5;
+      --border: #e0e0e0;
+      --white: #ffffff;
+      --hero-bg: #d9e0e6;
+      --accent: #7a6fbe;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img { height: 36px; width: auto; display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--black);
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.5; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 9999;
+      position: relative;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 620px) {
+      nav { padding: 1rem 1.5rem; }
+
+      .nav-hamburger { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 9000;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--black);
+      }
+    }
+
+    /* ── HERO STRIP ─────────────────────────────────────────── */
+    .hero-strip {
+      margin-top: 60px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-strip img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ── PAGE TITLE ─────────────────────────────────────────── */
+    .page-title {
+      text-align: center;
+      padding: 3.5rem 3rem 2.5rem;
+    }
+
+    .page-title h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--black);
+    }
+
+    /* ── META SECTION ───────────────────────────────────────── */
+    .meta-section {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+      gap: 2rem 6rem;
+    }
+
+    .meta-left { display: flex; flex-direction: column; gap: 1.6rem; }
+    .meta-right { display: flex; flex-direction: column; gap: 1.6rem; }
+
+    .meta-block {}
+
+    .meta-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.55rem;
+    }
+
+    .meta-text {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.72;
+    }
+
+    .meta-text + .meta-text { margin-top: 0.75rem; }
+
+    .roles-link {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── GALLERY ────────────────────────────────────────────── */
+    .gallery {
+      padding: 0 3rem 5rem;
+    }
+
+    /* 3-column masonry */
+    .masonry {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    .m-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .m-col-left  { flex: 0 0 calc(36% - 4px); }
+    .m-col-mid   { flex: 0 0 calc(26% - 4px); }
+    .m-col-right { flex: 1; }
+
+    /* Base tile */
+    .tile {
+      position: relative;
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Heights — fluid so they feel right at any viewport */
+    .h-460 { height: clamp(220px, 36vw, 460px); }
+    .h-260 { height: clamp(140px, 20vw, 260px); }
+    .h-220 { height: clamp(120px, 17vw, 220px); }
+    .h-200 { height: clamp(110px, 16vw, 200px); }
+    .h-180 { height: clamp(100px, 14vw, 180px); }
+    .h-140 { height: clamp( 80px, 11vw, 140px); }
+    .h-100 { height: clamp( 60px,  8vw, 100px); }
+    .h-70  { height: clamp( 44px,  5vw,  70px); }
+    .h-56  { height: clamp( 36px,  4vw,  56px); }
+
+    /* Row helper — tiles side by side inside a column */
+    .tile-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tile-row .tile { flex: 1; }
+
+    /* Placeholder colours */
+    .bg-pink      { background: #f0b8c2; }
+    .bg-soft-gray { background: #e8e4df; }
+    .bg-cream     { background: #f2ede8; }
+    .bg-white-off { background: #f8f7f5; }
+    .bg-slate     { background: #4a5f72; }
+    .bg-rose      { background: #e8b4be; }
+    .bg-lavender  { background: #d8d4e8; }
+    .bg-warm      { background: #ede8e2; }
+    .bg-mist      { background: #dde5e8; }
+    .bg-blush     { background: #f4cdd4; }
+
+    /* Number badge */
+    .tile-num {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      z-index: 4;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: rgba(255,255,255,0.92);
+      background: rgba(0,0,0,0.30);
+      backdrop-filter: blur(4px);
+      border-radius: 100px;
+      padding: 0.18rem 0.5rem;
+      pointer-events: none;
+    }
+
+    /* Tile copy overlay (for text-only tiles) */
+    .tile-copy {
+      padding: 1.4rem 1.4rem;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .copy-sm {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--gray);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .copy-md {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.35;
+    }
+
+    .copy-lg {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--black);
+      line-height: 1.3;
+    }
+
+    .copy-accent { color: #c85a5a; }
+    .copy-purple { color: var(--accent); }
+    .copy-green  { color: #4a8a70; }
+    .copy-white  { color: #fff; }
+    .copy-gold   { color: #e8c878; }
+
+    .copy-tag {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      padding: 2.5rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer .footer-logo img { height: 30px; }
+
+    footer .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    footer .footer-links a {
+      font-size: 0.85rem;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    footer .footer-links a:hover { color: var(--black); }
+
+    footer .footer-date {
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
+    /* iPad and below (768px) — stack everything vertically */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-title { padding: 2.5rem 1.5rem 1.5rem; }
+      .meta-section {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem 3rem;
+        gap: 1.5rem 0;
+      }
+      .gallery { padding: 0 1.5rem 3rem; }
+
+      /* Stack all masonry columns */
+      .masonry { flex-direction: column; }
+      .m-col,
+      .m-col-left,
+      .m-col-mid,
+      .m-col-right { flex: none !important; width: 100% !important; max-width: 100% !important; }
+
+      /* Stack side-by-side tile rows */
+      .tile-row { flex-direction: column; }
+      .tile-row .tile { flex: none; width: 100%; }
+      .tile-row > div { flex: none !important; width: 100% !important; }
+    }
+  </style>
+  <script>
+    (function(){
+      var c=document.createElement("canvas");c.width=64;c.height=64;
+      var ctx=c.getContext("2d"),img=new Image();
+      img.onload=function(){
+        var pad=2,size=64-pad*2,sc=Math.min(size/img.width,size/img.height);
+        var w=img.width*sc,h=img.height*sc;
+        ctx.drawImage(img,(64-w)/2,(64-h)/2,w,h);
+        var l=document.createElement("link");l.rel="icon";l.type="image/png";
+        l.href=c.toDataURL("image/png");document.head.appendChild(l);
+      };img.src="HU_Logo.png";
+    })();
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXSVPXK3VE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXSVPXK3VE');
+  </script>
+  <link rel="stylesheet" href="BubbleMenu-v2.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="BubbleMenu-v2.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">
+      <img src="HU_Logo.png" alt="Hu Logo" />
+    </a>
+    <ul class="nav-links" id="nav-links">
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="#">Playground</a></li>
+    <li><a href="#">Photography</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <img src="Theralogix-hero-banner.png" alt="Theralogix hero banner" />
+  </div>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <h1>Theralogix</h1>
+  </div>
+
+  <!-- META -->
+  <div class="meta-section">
+    <div class="meta-left">
+      <div class="meta-block">
+        <p class="meta-label">Overview</p>
+        <p class="meta-text">Theralogix is a leading producer of scientifically formulated nutritional supplements made from premium ingredients, independently tested and certified, and trusted by healthcare providers and patients for over 20 years.</p>
+        <p class="meta-text">I worked as a full-time graphic designer and help them creating both print and digital design, including packaging design, marketing assets, 3D animation and product shooting and editing.</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Tools</p>
+        <p class="meta-text">Adobe Illustrator, Photoshop, InDesign, Blender, and DSLR camera.</p>
+      </div>
+    </div>
+
+    <div class="meta-right">
+      <div class="meta-block">
+        <p class="meta-label">Timeline</p>
+        <p class="meta-text">Sep 2024 – Present</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Type</p>
+        <p class="meta-text">Full-Time</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Roles</p>
+        <p class="meta-text">
+          <a class="roles-link" href="#">Graphic Designer</a> – Print &amp; Digital
+          Design, Advertising Design, 3D
+          Modeling, and Product Photography
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery">
+
+    <!-- ── TOP SECTION: images 1–5 ── -->
+    <div class="masonry">
+
+      <!-- Left column: tiles 1, 2, 3 -->
+      <div class="m-col" style="flex:2;">
+
+        <div class="tile bg-pink">
+          <img src="Thealogix-Ovasitol.gif" alt="Theralogix Ovasitol" style="width:100%;height:auto;display:block;" />
+        </div>
+
+        <div class="tile-row">
+          <div class="tile bg-soft-gray">
+            <img src="Theralogix-Mannose One-Social.png" alt="Theralogix Mannose One Social" style="width:100%;height:auto;display:block;" />
+          </div>
+          <div class="tile bg-white-off">
+            <img src="Theralogix-pills-social.png" alt="Theralogix Pills Social" style="width:100%;height:auto;display:block;" />
+          </div>
+        </div>
+
+        <div class="tile-row" style="align-items:stretch;">
+          <div class="tile bg-white-off" style="flex:1; display:flex; flex-direction:column; gap:6px;">
+            <img src="Theralogix-products.gif" alt="Theralogix Products" style="width:100%;height:auto;display:block;" />
+            <img src="Theralogix-pregnancy-test-social-ad.png" alt="Theralogix Pregnancy Test Social Ad" style="width:100%;height:auto;display:block;" />
+          </div>
+          <div class="tile bg-white-off" style="flex:1;">
+            <img src="Theralogix-shelf-products-social.png" alt="Theralogix Shelf Products Social" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right column: tile 4 then tile 5 stacked -->
+      <div class="m-col" style="flex:1; max-width:30%;">
+
+        <div class="tile bg-white-off">
+          <img src="Theralogix-NeoQ10-Social.png" alt="Theralogix NeoQ10 Social" style="width:100%;height:auto;display:block;" />
+        </div>
+
+        <div class="tile bg-white-off">
+          <img src="Theralogix-CXR+MS.gif" alt="Theralogix CXR+MS" style="width:100%;height:auto;display:block;" />
+        </div>
+
+        <div class="tile bg-white-off">
+          <img src="Theralogix-Magazine-ad.png" alt="Theralogix Magazine Ad" style="width:100%;height:auto;display:block;" />
+        </div>
+
+      </div>
+
+    </div><!-- /top masonry -->
+
+
+  </div><!-- /gallery -->
+
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          navLinks.classList.remove('open');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

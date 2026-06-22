@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kokie Cosmetics — Dora Hu Design</title>
+  <meta name="description" content="Kokie Cosmetics — Digital Design, Advertising Design, and Product Photography by Dora Hu." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #b8a8cc;
+      --black: #1a1a1a;
+      --gray: #6b6b6b;
+      --light-gray: #f5f5f5;
+      --border: #e0e0e0;
+      --white: #ffffff;
+      --hero-bg: #c4b5d5;
+      --gap: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img { height: 36px; width: auto; display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Manrope', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--black);
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.5; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+      z-index: 9999;
+      position: relative;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 620px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 9000;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.6rem; font-weight: 700; }
+    }
+
+    /* ─── HERO STRIP ──────────────────────────────────────── */
+    .hero-strip {
+      margin-top: 60px;
+      position: relative;
+      background: var(--hero-bg);
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-logo img {
+      height: 80px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* ─── PAGE TITLE ──────────────────────────────────────── */
+    .page-title {
+      text-align: center;
+      padding: 3.5rem 3rem 2.5rem;
+    }
+
+    .page-title h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--black);
+    }
+
+    /* ─── META SECTION ────────────────────────────────────── */
+    .meta-section {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+      gap: 2rem 6rem;
+    }
+
+    .meta-left { display: flex; flex-direction: column; gap: 1.6rem; }
+    .meta-right { display: flex; flex-direction: column; gap: 1.6rem; }
+
+    .meta-block {}
+
+    .meta-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 0.55rem;
+    }
+
+    .meta-text {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.72;
+    }
+
+    .meta-text + .meta-text { margin-top: 0.75rem; }
+
+    .roles-link {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ─── GALLERY ─────────────────────────────────────────── */
+    .gallery {
+      padding: 2.5rem 3rem 0;
+    }
+
+    .g-row {
+      display: flex;
+      gap: var(--gap);
+      margin-bottom: var(--gap);
+    }
+
+    /* Placeholder tile base */
+    .ph {
+      position: relative;
+      background: #ede8f0;
+      border-radius: 3px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ph img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ph-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      pointer-events: none;
+    }
+
+    .ph-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(0,0,0,0.18);
+      line-height: 1;
+    }
+
+    .ph-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.28);
+    }
+
+    /* ── Color variants ── */
+    .c-lavender  { background: #ddd4eb; }
+    .c-rose      { background: #f0dde4; }
+    .c-nude      { background: #f0e8e0; }
+    .c-charcoal  { background: #2e2e3a; }
+    .c-charcoal .ph-num,
+    .c-charcoal .ph-tag { color: rgba(255,255,255,0.25); }
+    .c-blush     { background: #f4d5dc; }
+    .c-peach     { background: #f5dfc8; }
+    .c-sage      { background: #c8d8c4; }
+    .c-cream     { background: #f8f4ee; }
+    .c-mauve     { background: #d8c4cc; }
+    .c-ivory     { background: #f9f6f0; }
+    .c-plum      { background: #c4a8cc; }
+    .c-warm      { background: #e8ddd4; }
+    .c-terracotta{ background: #e8c4b0; }
+    .c-olive     { background: #b8c4a0; }
+
+    /* ── Width helpers ── */
+    .w-full { flex: 1 1 100%; }
+    .w-half { flex: 1 1 0; }
+    .w-third { flex: 1 1 0; }
+    .w-quarter { flex: 0 0 25%; }
+    .w-3quarter { flex: 1 1 0; }
+    .w-2third { flex: 2 1 0; }
+    .w-1third { flex: 1 1 0; }
+
+    /* Narrow for 3-col n-w-n rows */
+    .w-narrow { flex: 0 0 22%; }
+    .w-wide   { flex: 1 1 0; }
+
+    /* ── Height helpers ── */
+    .h-xs   { height: 140px; }
+    .h-sm   { height: 200px; }
+    .h-md   { height: 260px; }
+    .h-lg   { height: 320px; }
+    .h-xl   { height: 400px; }
+    .h-tall { height: 480px; }
+
+    /* ─── SECTION HEADERS (Behind the Scene / The Team) ──── */
+    .section-block {
+      padding: 3rem 3rem 2rem;
+    }
+
+    .section-block h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .caption-grid {
+      display: flex;
+      gap: var(--gap);
+    }
+
+    .caption-item {
+      flex: 1 1 0;
+    }
+
+    .caption-item .ph {
+      width: 100%;
+    }
+
+    .caption-text {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gray);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .caption-text em {
+      font-style: normal;
+      font-size: 0.72rem;
+      color: #999;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      #team-grid { flex-direction: column; }
+      #team-grid .caption-item { flex: none; width: 100%; }
+    }
+
+    @media (max-width: 700px) {
+      #scene-grid { flex-direction: column; }
+      #scene-grid .caption-item { flex: none; width: 100%; min-width: 0; }
+      .section-block:has(#scene-grid) { padding-left: 4rem; padding-right: 4rem; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-strip { height: 150px; }
+      .hero-logo img { height: 56px; }
+      .page-title { padding: 2.5rem 1.5rem 1.5rem; }
+      .meta-section {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem 3rem;
+        gap: 1.5rem 0;
+      }
+      .gallery { padding: 1.5rem 1rem 0; }
+      .g-row { flex-wrap: wrap; }
+      .w-half, .w-third, .w-quarter, .w-3quarter, .w-2third, .w-1third,
+      .w-narrow, .w-wide { flex: 1 1 45%; }
+      .w-full { flex: 1 1 100%; }
+      .section-block { padding: 2rem 1.5rem 1.5rem; }
+      .caption-grid { flex-wrap: wrap; }
+      .caption-item { flex: 1 1 45%; }
+    }
+  </style>
+  <script>
+    (function(){
+      var c=document.createElement("canvas");c.width=64;c.height=64;
+      var ctx=c.getContext("2d"),img=new Image();
+      img.onload=function(){
+        var pad=2,size=64-pad*2,sc=Math.min(size/img.width,size/img.height);
+        var w=img.width*sc,h=img.height*sc;
+        ctx.drawImage(img,(64-w)/2,(64-h)/2,w,h);
+        var l=document.createElement("link");l.rel="icon";l.type="image/png";
+        l.href=c.toDataURL("image/png");document.head.appendChild(l);
+      };img.src="HU_Logo.png";
+    })();
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXSVPXK3VE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CXSVPXK3VE');
+  </script>
+  <link rel="stylesheet" href="BubbleMenu-v2.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="BubbleMenu-v2.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="portfolio.html" class="nav-logo">
+      <img src="HU_Logo.png" alt="Hu Logo" />
+    </a>
+    <ul class="nav-links" id="nav-links">
+    <li><a href="portfolio.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="#">Playground</a></li>
+    <li><a href="#">Photography</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <img src="Kokie-logo-banner.png" alt="Kokie Professional" style="width:100%;height:100%;object-fit:cover;" />
+  </div>
+
+  <!-- PAGE TITLE -->
+  <div class="page-title">
+    <h1>Kokie Cosmetics</h1>
+  </div>
+
+  <!-- META -->
+  <div class="meta-section">
+    <div class="meta-left">
+      <div class="meta-block">
+        <p class="meta-label">Overview</p>
+        <p class="meta-text">Kokie Cosmetics, a K-Beauty inspired cosmetic brand, was founded in 2015 in Maryland. They offer high quality products at an affordable price point.</p>
+        <p class="meta-text">I worked as a Design Intern creating marketing assets, website banners, animated social media graphics, and product shooting and editing.</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Tools</p>
+        <p class="meta-text">Adobe Illustrator, Photoshop, Lightroom, Canva, After Effects</p>
+      </div>
+    </div>
+
+    <div class="meta-right">
+      <div class="meta-block">
+        <p class="meta-label">Timeline</p>
+        <p class="meta-text">Jun – Dec 2023</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Type</p>
+        <p class="meta-text">Internship</p>
+      </div>
+      <div class="meta-block">
+        <p class="meta-label">Role</p>
+        <p class="meta-text">
+          <a class="roles-link" href="#">Graphic Design Intern</a> – Digital Design, Advertising Design, Product Photography
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── GALLERY ─────────────────────────────────────────── -->
+  <div class="gallery">
+
+    <!-- Row 1–3: left column stacks images 1, 2, 3 — right column holds image 4 -->
+    <div class="g-row" style="align-items:stretch;">
+      <div class="w-half" style="display:flex;flex-direction:column;gap:var(--gap);">
+        <div class="ph" style="height:auto;">
+          <img src="Kokie-day-night-cream-banner.png" alt="Kokie Day Night Cream Banner" style="width:100%;height:auto;object-fit:unset;" />
+        </div>
+        <div class="ph" style="height:auto;">
+          <img src="Kokie-lips-banner.png" alt="Kokie Lips Banner" style="width:100%;height:auto;object-fit:unset;" />
+        </div>
+        <div class="ph" style="height:auto;">
+          <img src="Kokie-skincare-banner.png" alt="Kokie Skincare Banner" style="width:100%;height:auto;object-fit:unset;" />
+        </div>
+      </div>
+      <div class="ph" style="flex:0 0 35%;">
+        <img src="Kokie-day-cream-social-ad.png" alt="Kokie Day Cream Social Ad" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+    </div>
+
+    <!-- Row 3–5: images 5, 6 & 7 side by side -->
+    <div class="g-row" style="align-items:flex-start;">
+      <div class="ph" style="flex:1 1 0;min-width:0;height:auto;">
+        <img src="Kokie-Perfecting-Poreless-Primer.gif" alt="Kokie Perfecting Poreless Primer" style="width:100%;height:auto;display:block;object-fit:unset;" />
+      </div>
+      <div class="ph" style="flex:1 1 0;min-width:0;height:auto;">
+        <img src="Kokie-Perfecting-Poreless-Primer-social-ad.png" alt="Kokie Perfecting Poreless Primer Social Ad" style="width:100%;height:auto;display:block;object-fit:unset;" />
+      </div>
+      <div class="ph" style="flex:1 1 0;min-width:0;height:auto;">
+        <img src="Kokie-liquid-lip-poudre.gif" alt="Kokie Liquid Lip Poudre" style="width:100%;height:auto;display:block;object-fit:unset;" />
+      </div>
+    </div>
+
+    <!-- Row 5–6: images 8 & 9 -->
+    <div class="g-row" style="align-items:flex-start;">
+      <div class="ph w-half" style="height:auto;">
+        <img src="Kokie-Tanologist-1.png" alt="Kokie Tanologist 1" style="width:100%;height:auto;display:block;object-fit:unset;" />
+      </div>
+      <div class="ph w-half" style="height:auto;">
+        <img src="Kokie-Tanologist-2.png" alt="Kokie Tanologist 2" style="width:100%;height:auto;display:block;object-fit:unset;" />
+      </div>
+    </div>
+
+    <!-- Row 6–7: image 10 left, images 11 & 12 stacked right -->
+    <div class="g-row" style="align-items:stretch;">
+      <div class="ph" style="flex:0 0 38%;">
+        <img src="Kokie-stop-motion.gif" alt="Kokie Stop Motion" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+      <div style="flex:1 1 0;display:flex;flex-direction:column;gap:var(--gap);">
+        <div class="ph" style="height:auto;">
+          <img src="Kokie-concealer-banner.png" alt="Kokie Concealer Banner" style="width:100%;height:auto;display:block;object-fit:unset;" />
+        </div>
+        <div class="ph" style="height:auto;">
+          <img src="Kokie-Gel-Ink-Eyeliner-banner.png" alt="Kokie Gel Ink Eyeliner Banner" style="width:100%;height:auto;display:block;object-fit:unset;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 8–9: image 13 left, images 14 & 15 stacked right -->
+    <div class="g-row" style="align-items:stretch;">
+      <div class="ph" style="flex:0 0 40%;">
+        <img src="Kokie-foundation-blush-photography.png" alt="Kokie Foundation Blush Photography" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+      <div class="w-half" style="display:flex;flex-direction:column;gap:var(--gap);">
+        <div class="ph" style="height:auto;">
+          <img src="Kokie-Artist-palette-banner.png" alt="Kokie Artist Palette Banner" style="width:100%;height:auto;display:block;object-fit:unset;" />
+        </div>
+        <div class="ph" style="height:auto;">
+          <img src="Kokie-Probiotic-cleanser-banner.png" alt="Kokie Probiotic Cleanser Banner" style="width:100%;height:auto;display:block;object-fit:unset;" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 9: small left + right -->
+    <div class="g-row" style="align-items:flex-start;">
+      <div class="ph" style="flex:0 0 30%;height:auto;">
+        <img src="Kokie-makeup-brushes.png" alt="Kokie Makeup Brushes" style="width:100%;height:auto;display:block;object-fit:unset;" />
+      </div>
+      <div class="ph" style="flex:1 1 0;height:auto;">
+        <img src="Kokie-eyebrow-pencil-banner.png" alt="Kokie Eyebrow Pencil Banner" style="width:100%;height:auto;display:block;object-fit:unset;" />
+      </div>
+    </div>
+
+
+  </div>
+  <!-- end .gallery -->
+
+  <!-- ─── BEHIND THE SCENE ────────────────────────────────── -->
+  <div class="section-block">
+    <h2>Behind the Scene</h2>
+    <div class="caption-grid" id="scene-grid" style="align-items:flex-start;flex-wrap:nowrap;">
+      <div class="caption-item" style="flex:1 1 0;min-width:0;">
+        <div class="ph" style="width:100%;height:360px;">
+          <img src="Kokie-dora-product-photography.jpeg" alt="Kokie Product Photography" style="width:100%;height:100%;display:block;object-fit:cover;" />
+        </div>
+        <p class="caption-text">Product Shooting</p>
+      </div>
+      <div class="caption-item" style="flex:1 1 0;min-width:0;">
+        <div class="ph" style="width:100%;height:360px;">
+          <img src="Kokie-design-internship.png" alt="Kokie Design Internship" style="width:100%;height:100%;display:block;object-fit:cover;" />
+        </div>
+        <p class="caption-text">It was my first day of internship!</p>
+      </div>
+      <div class="caption-item" style="flex:1 1 0;min-width:0;">
+        <div class="ph" style="width:100%;height:360px;">
+          <img src="Kokie-color-matching.png" alt="Kokie Color Matching" style="width:100%;height:100%;display:block;object-fit:cover;" />
+        </div>
+        <p class="caption-text">Color matching for color swatches</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── THE TEAM ────────────────────────────────────────── -->
+  <div class="section-block" style="padding:0;">
+    <h2>The Team</h2>
+    <div class="caption-grid" id="team-grid">
+      <div class="caption-item">
+        <div class="ph" style="width:100%;height:auto;background:transparent;">
+          <img src="Kokie-interns.png" alt="Kokie Interns" style="width:90%;height:auto;display:block;object-fit:unset;margin:0 auto;" />
+        </div>
+        <p class="caption-text">Summer Interns<br/><em>(Samantha Liu, Alexa Chen, Maryam Ali, Myself)</em></p>
+      </div>
+      <div class="caption-item">
+        <div class="ph" style="width:100%;height:auto;background:transparent;">
+          <img src="Kokie-teams.JPG" alt="Kokie Team" style="width:90%;height:auto;display:block;object-fit:unset;margin:0 auto;" />
+        </div>
+        <p class="caption-text" style="margin-bottom:3rem;">Shoutout to the best team ever!! My manager Caitlin, in-house graphic designer Lauren, and front desk receptionist Amber. They are the best people to work with!</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      })
+    );
+  </script>
+
+</body>
+</html>
