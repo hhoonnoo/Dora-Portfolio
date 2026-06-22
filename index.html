@@ -410,9 +410,6 @@
       width: max-content;
     }
 
-    .footer-archive:hover .archive-ticker {
-      animation-duration: 40s;
-    }
 
     .archive-item {
       display: flex;
@@ -1490,6 +1487,23 @@
       });
     });
   });
+
+  // Ticker smooth speed on hover
+  (function() {
+    const ticker = document.querySelector('.archive-ticker');
+    const archive = document.querySelector('.footer-archive');
+    if (!ticker || !archive) return;
+    const FAST = 12, SLOW = 48;
+    let current = FAST, target = FAST, raf;
+    function tick() {
+      current += (target - current) * 0.05;
+      ticker.style.animationDuration = current + 's';
+      raf = requestAnimationFrame(tick);
+    }
+    archive.addEventListener('mouseenter', () => { target = SLOW; });
+    archive.addEventListener('mouseleave', () => { target = FAST; });
+    raf = requestAnimationFrame(tick);
+  })();
 
   // Hamburger menu
   const hamburger = document.getElementById('hamburger');
