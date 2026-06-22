@@ -239,7 +239,25 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.22s ease;
       cursor: pointer;
       box-shadow: none;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .work-card.in-view {
       opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .section-title.in-view {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .section-title {
+      opacity: 0;
+      transform: translateY(16px);
     }
 
     .work-card:hover {
@@ -1502,6 +1520,28 @@
       }, 190);
     });
   });
+
+  // Scroll fade-in for toggle and cards
+  (function() {
+    const targets = [
+      document.querySelector('.section-title'),
+      ...document.querySelectorAll('.work-card')
+    ].filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, _, obs) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    targets.forEach((el, i) => {
+      el.style.transitionDelay = (i * 60) + 'ms';
+      observer.observe(el);
+    });
+  })();
 
   // Ticker JS-driven constant speed, instant slow on hover
   (function() {
