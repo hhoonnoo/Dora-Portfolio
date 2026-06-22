@@ -390,7 +390,7 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-      flex: 0 1 55%;
+      flex: 1;
       min-width: 0;
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
       mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
@@ -448,8 +448,13 @@
       font-weight: 400;
       color: #888;
       flex-shrink: 0;
-      margin-right: calc(110px + 1.5rem);
       white-space: nowrap;
+    }
+
+    .footer-btn {
+      flex-shrink: 0;
+      position: static;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     }
 
     /* ─── FLOATING KEEP IN TOUCH ─────────────────────────── */
@@ -1438,13 +1443,8 @@
     </div>
   </div>
   <p class="footer-credit">Designed by me &amp; coded with Claude Code</p>
-
+  <a href="mailto:dorahudesign@gmail.com" class="floating-btn footer-btn">Keep in<br>Touch</a>
 </footer>
-
-<!-- FLOATING KEEP IN TOUCH -->
-<div class="floating-anchor">
-  <a href="mailto:dorahudesign@gmail.com" class="floating-btn">Keep in<br>Touch</a>
-</div>
 
 <script>
 
