@@ -1488,21 +1488,27 @@
     });
   });
 
-  // Ticker smooth speed on hover
+  // Ticker JS-driven constant speed, instant slow on hover
   (function() {
     const ticker = document.querySelector('.archive-ticker');
     const archive = document.querySelector('.footer-archive');
     if (!ticker || !archive) return;
-    const FAST = 12, SLOW = 48;
-    let current = FAST, target = FAST, raf;
-    function tick() {
-      current += (target - current) * 0.05;
-      ticker.style.animationDuration = current + 's';
-      raf = requestAnimationFrame(tick);
+    ticker.style.animation = 'none';
+    const NORMAL = 80, SLOW = 35;
+    let x = 0, speed = NORMAL, last = null;
+    archive.addEventListener('mouseenter', () => { speed = SLOW; });
+    archive.addEventListener('mouseleave', () => { speed = NORMAL; });
+    function loop(ts) {
+      if (last !== null) {
+        x -= speed * (ts - last) / 1000;
+        const half = ticker.scrollWidth / 2;
+        if (Math.abs(x) >= half) x += half;
+        ticker.style.transform = 'translateX(' + x + 'px)';
+      }
+      last = ts;
+      requestAnimationFrame(loop);
     }
-    archive.addEventListener('mouseenter', () => { target = SLOW; });
-    archive.addEventListener('mouseleave', () => { target = FAST; });
-    raf = requestAnimationFrame(tick);
+    requestAnimationFrame(loop);
   })();
 
   // Hamburger menu
