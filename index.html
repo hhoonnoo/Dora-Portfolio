@@ -1467,24 +1467,39 @@
     }
   });
 
+  let filterLock = false;
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (filterLock) return;
+      filterLock = true;
+
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       movePill(btn);
 
       const filter = btn.dataset.filter;
-      document.querySelectorAll('.work-card').forEach(card => {
-        const show = filter === 'all' || card.dataset.category === filter;
-        if (show) {
-          card.style.display = '';
-          requestAnimationFrame(() => { card.style.opacity = '1'; card.style.transform = ''; });
-        } else {
-          card.style.opacity = '0';
-          card.style.transform = 'scale(0.96)';
-          setTimeout(() => { card.style.display = 'none'; }, 220);
-        }
-      });
+      const cards = [...document.querySelectorAll('.work-card')];
+      const show = cards.filter(c => filter === 'all' || c.dataset.category === filter);
+      const hide = cards.filter(c => filter !== 'all' && c.dataset.category !== filter);
+
+      // Fade all visible cards out first
+      cards.forEach(c => { c.style.transition = 'opacity 0.18s ease'; c.style.opacity = '0'; });
+
+      setTimeout(() => {
+        // Switch display
+        hide.forEach(c => { c.style.display = 'none'; });
+        show.forEach(c => { c.style.display = ''; c.style.opacity = '0'; });
+
+        // Stagger them back in
+        show.forEach((c, i) => {
+          setTimeout(() => {
+            c.style.transition = 'opacity 0.22s ease';
+            c.style.opacity = '1';
+          }, i * 60);
+        });
+
+        setTimeout(() => { filterLock = false; }, show.length * 60 + 220);
+      }, 190);
     });
   });
 
