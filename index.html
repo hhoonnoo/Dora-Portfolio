@@ -103,6 +103,7 @@
       overflow: visible;
     }
 
+
     .hero-text {
       flex: 1 1 50%;
       text-align: left;
@@ -236,28 +237,23 @@
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.22s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease;
       cursor: pointer;
       box-shadow: none;
       opacity: 0;
-      transform: translateY(24px);
     }
 
     .work-card.in-view {
       opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .section-title.in-view {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 1.2s ease, transform 1.2s ease;
     }
 
     .section-title {
       opacity: 0;
-      transform: translateY(16px);
+      transition: opacity 1.2s ease;
+    }
+
+    .section-title.in-view {
+      opacity: 1;
     }
 
     .work-card:hover {
@@ -1529,16 +1525,18 @@
     ].filter(Boolean);
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, _, obs) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
+          const el = entry.target;
+          el.classList.add('in-view');
+          observer.unobserve(el);
+          setTimeout(() => { el.style.transitionDelay = ''; }, 800);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
     targets.forEach((el, i) => {
-      el.style.transitionDelay = (i * 60) + 'ms';
+      el.style.transitionDelay = (i * 80) + 'ms';
       observer.observe(el);
     });
   })();
