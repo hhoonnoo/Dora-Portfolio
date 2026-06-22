@@ -1544,13 +1544,12 @@
   }
 
   // Magnetic button
-  const magnet = document.querySelector('.floating-anchor .floating-btn');
-  const magnetAnchor = document.querySelector('.floating-anchor');
+  const magnet = document.querySelector('.footer-btn');
   const magnetStrength = 0.4;
   const magnetRadius = 140;
 
   document.addEventListener('mousemove', e => {
-    const rect = magnetAnchor.getBoundingClientRect();
+    const rect = magnet.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
     const dx = e.clientX - cx;
