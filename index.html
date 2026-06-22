@@ -384,14 +384,13 @@
       display: flex;
       align-items: center;
       gap: 1.5rem;
-      position: relative;
     }
 
     .footer-archive {
       display: flex;
       align-items: center;
       overflow: hidden;
-      flex: 1;
+      flex: 0 1 55%;
       min-width: 0;
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
       mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
@@ -449,9 +448,8 @@
       font-weight: 400;
       color: #888;
       flex-shrink: 0;
-      position: absolute;
-      bottom: 2.5rem;
-      right: calc(110px + 2.5rem);
+      margin-right: calc(110px + 1.5rem);
+      white-space: nowrap;
     }
 
     /* ─── FLOATING KEEP IN TOUCH ─────────────────────────── */
@@ -1440,6 +1438,7 @@
     </div>
   </div>
   <p class="footer-credit">Designed by me &amp; coded with Claude Code</p>
+
 </footer>
 
 <!-- FLOATING KEEP IN TOUCH -->
